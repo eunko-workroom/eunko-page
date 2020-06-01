@@ -28,7 +28,7 @@ const PageTemplate: React.FC<React.PropsWithChildren<IProps>> = ({
       {isMobile && Boolean(selectedImages.length) && visibleBackButton && (
         <BackButton onClick={handleBackButtonClick} />
       )}
-      {(!isMobile || Boolean(selectedImages.length)) && <Main>{children}</Main>}
+      {(!isMobile || !selectedImages.length) && <Main>{children}</Main>}
       {Boolean(selectedImages.length) && (
         <ImageWrapper>
           <Image
