@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { MEDIA_QUERY } from "../../constants/responsive";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -15,7 +16,9 @@ export const Main = styled.div<{ margin?: number }>`
   ${(props) =>
     props.margin &&
     css`
-      margin-left: ${props.margin}px;
+      @media ${MEDIA_QUERY.DESKTOP} {
+        margin-left: ${props.margin}px;
+      }
     `}
 `;
 

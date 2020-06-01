@@ -4,6 +4,7 @@ import { createBrowserHistory, History } from "history";
 import GlobalStyle from "./globalStyle";
 import GlobalAppBar from "./common/components/globalHeader";
 import PageTemplate from "./common/components/pageTemplate";
+import MainContents from "./pages/main";
 import styled from "styled-components";
 
 // TODO 컴포넌트 분리 필요
@@ -18,27 +19,44 @@ function RootComponent() {
     Editorial: [],
     More: [],
   };
-  const [selectedImageIndex, setSelectedImageIndex] = React.useState<number>(0);
-  const handleNextImage = React.useCallback(() => {
-    setSelectedImageIndex(selectedImageIndex + 1);
+  const [selectedImageIndex, setSelectedImageIndex] = React.useState<
+    number | undefined
+  >(undefined);
+  const handleNextImageClick = React.useCallback(() => {
+    if (selectedImageIndex) {
+      setSelectedImageIndex(selectedImageIndex + 1);
+    }
   }, [selectedImageIndex]);
-  const handlePrevImage = React.useCallback(() => {
-    setSelectedImageIndex(selectedImageIndex - 1);
+  const handlePrevImageClick = React.useCallback(() => {
+    if (selectedImageIndex) {
+      setSelectedImageIndex(selectedImageIndex - 1);
+    }
   }, [selectedImageIndex]);
+  const handleBackButtonClick = React.useCallback(() => {
+    setSelectedImageIndex(undefined);
+  }, []);
   const photographySelectedImage = React.useMemo(
     () =>
-      contents.Photography.reduce(
-        (result, current) => result.concat(current),
-        []
-      )[selectedImageIndex],
+      selectedImageIndex !== undefined
+        ? [
+            contents.Photography.reduce(
+              (result, current) => result.concat(current),
+              []
+            )[selectedImageIndex],
+          ]
+        : [],
     [contents.Photography, selectedImageIndex]
   );
   const editorialSelectedImage = React.useMemo(
     () =>
-      contents.Editorial.reduce(
-        (result, current) => result.concat(current),
-        []
-      )[selectedImageIndex],
+      selectedImageIndex !== undefined
+        ? [
+            contents.Editorial.reduce(
+              (result, current) => result.concat(current),
+              []
+            )[selectedImageIndex],
+          ]
+        : [],
     [contents.Editorial, selectedImageIndex]
   );
   const moreSelectedImage = React.useMemo(
@@ -57,11 +75,12 @@ function RootComponent() {
         <Switch>
           <Route path="/photography">
             <PageTemplate
-              selectedImages={[photographySelectedImage]}
+              selectedImages={photographySelectedImage}
               visibleNextButton={visibleNextButton}
               visiblePrevButton={visiblePrevButton}
-              handleNextImage={handleNextImage}
-              handlePrevImage={handlePrevImage}
+              handleBackButtonClick={handleBackButtonClick}
+              handleNextImageClick={handleNextImageClick}
+              handlePrevImageClick={handlePrevImageClick}
             >
               {() => (
                 <SubMenu>
@@ -78,11 +97,12 @@ function RootComponent() {
           </Route>
           <Route path="/editorial">
             <PageTemplate
-              selectedImages={[editorialSelectedImage]}
+              selectedImages={editorialSelectedImage}
               visibleNextButton={visibleNextButton}
               visiblePrevButton={visiblePrevButton}
-              handleNextImage={handleNextImage}
-              handlePrevImage={handlePrevImage}
+              handleBackButtonClick={handleBackButtonClick}
+              handleNextImageClick={handleNextImageClick}
+              handlePrevImageClick={handlePrevImageClick}
             >
               {() => (
                 <SubMenu>
@@ -102,8 +122,10 @@ function RootComponent() {
               selectedImages={moreSelectedImage}
               visibleNextButton={visibleNextButton}
               visiblePrevButton={visiblePrevButton}
-              handleNextImage={handleNextImage}
-              handlePrevImage={handlePrevImage}
+              visibleBackButton={false}
+              handleBackButtonClick={handleBackButtonClick}
+              handleNextImageClick={handleNextImageClick}
+              handlePrevImageClick={handlePrevImageClick}
             ></PageTemplate>
           </Route>
           <Route path="/">
@@ -111,11 +133,10 @@ function RootComponent() {
               selectedImages={[]}
               visibleNextButton={false}
               visiblePrevButton={false}
+              visibleBackButton={false}
+              handleBackButtonClick={handleBackButtonClick}
             >
-              {() => (
-                // mainContent
-                <div />
-              )}
+              <MainContents />
             </PageTemplate>
           </Route>
         </Switch>
