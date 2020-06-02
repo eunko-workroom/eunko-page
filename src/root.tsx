@@ -7,13 +7,17 @@ import PageTemplate from "./common/components/pageTemplate";
 import MainContents from "./pages/main";
 import styled from "styled-components";
 
+import useGetAlbumsFromS3 from "./common/hooks/useGetAlbumsFromS3";
+
 // TODO 컴포넌트 분리 필요
 // ASIS: 여기서 필요없는 데이터들을 다 선언함
 // TOBE: 컴포넌트를 분리시켜서 현재 탭의 데이터만 선언 하도록 함
 function RootComponent() {
   const history: History = createBrowserHistory();
 
-  // TODO: s3에서 받아올 타입
+  // TODO: CORS ERROR 해결후 주석제거
+  // const contents: Common.TabContent = useGetAlbumsFromS3();
+
   const contents: Common.TabContent = {
     Photography: [],
     Editorial: [],
