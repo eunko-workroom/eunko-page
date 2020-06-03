@@ -1,36 +1,27 @@
 
 const bucketName = 'eunko.workroom';
-const bucketRegion = 'us-east-2';
-const IdentityPoolId = 'us-east-2:0414f792-1ba0-41a4-aa67-c12a2661124f';
-const credentials = new window.AWS.CognitoIdentityCredentials({
-  IdentityPoolId: IdentityPoolId
-});
+const bucketRegion = 'ap-northeast-2';
 const apiVersion = '2006-03-01';
+const accessKeyId = 'AKIAJP7WGZ2JTXOPXX4A';
+const secretAccessKey = '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';
 const bucketUrl = `https://s3.amazonaws.com/${bucketName}/`;
-
-window.AWS.config.update({
-  region: bucketRegion,
-  credentials: credentials
-});
 
 const s3 = new window.AWS.S3({
   apiVersion: apiVersion,
   params: {
     Bucket: bucketName
-  }
+  },
+  accessKeyId: accessKeyId,
+  secretAccessKey: secretAccessKey,
+  region: bucketRegion
 });
 
 window.console.log('s3', s3);
 
-s3.listObjects({Delimiter: '/'}, (err, data) => {
+s3.listObjects({}, (err, data) => {
   if (err) {
     window.console.log(err.message, err);
   } else {
-    var albums = data.CommonPrefixes.map((commonPrefix) => {
-      var prefix = commonPrefix.Prefix;
-      var albumName = decodeURIComponent(prefix.replace('/', ''));
-      return albumName;
-    });
-    window.console.log('albums', albums);
+    window.console.log(data.Contents);
   }
 });
