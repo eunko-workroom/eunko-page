@@ -4,18 +4,18 @@ declare namespace Common {
 
   interface IOnlyImage {
     type: "nonDescriptionImage";
+    id: number;
     title: string;
-    // menu에서 보이는 이름과 image title이 다른듯
     menuTitle: string;
     src: string;
   }
 
   interface IImageWithDescription {
     type: "image";
+    id: number;
     src: string;
     title: string;
     subTitle: string;
-    // menu에서 보이는 이름과 image title이 다른듯
     menuTitle: string;
     date: string;
     size: string;

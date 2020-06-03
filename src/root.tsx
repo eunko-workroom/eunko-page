@@ -3,15 +3,13 @@ import { Router, Route, Switch } from "react-router";
 import { createBrowserHistory, History } from "history";
 import GlobalStyle from "./globalStyle";
 import GlobalAppBar from "./common/components/globalHeader";
-import PageTemplate from "./common/components/pageTemplate";
-import MainContents from "./pages/main";
-import styled from "styled-components";
+import Main from "./pages/main";
+import Photography from "./pages/photography";
+import Editorial from "./pages/editorial";
+import More from "./pages/more";
 
 import useGetAlbumsFromS3 from "./common/hooks/useGetAlbumsFromS3";
 
-// TODO 컴포넌트 분리 필요
-// ASIS: 여기서 필요없는 데이터들을 다 선언함
-// TOBE: 컴포넌트를 분리시켜서 현재 탭의 데이터만 선언 하도록 함
 function RootComponent() {
   const history: History = createBrowserHistory();
 
@@ -19,58 +17,129 @@ function RootComponent() {
   // const contents: Common.TabContent = useGetAlbumsFromS3();
 
   const contents: Common.TabContent = {
-    Photography: [],
-    Editorial: [],
-    More: [],
+    Photography: [
+      [
+        {
+          type: "image",
+          id: 0,
+          src: "string",
+          title: "Photography Image 1",
+          subTitle: "string",
+          menuTitle: "sub Menu 1",
+          date: "string",
+          size: "string",
+          feature: "string",
+        },
+        {
+          type: "image",
+          id: 1,
+          src: "string",
+          title: "Photography Image 2",
+          subTitle: "string",
+          menuTitle: "sub Menu 2",
+          date: "string",
+          size: "string",
+          feature: "string",
+        },
+        {
+          type: "image",
+          id: 2,
+          src: "string",
+          title: "Photography Image 3",
+          subTitle: "string",
+          menuTitle: "sub Menu 3",
+          date: "string",
+          size: "string",
+          feature: "string",
+        },
+      ],
+    ],
+    Editorial: [
+      [
+        {
+          type: "image",
+          id: 0,
+          src: "string",
+          title: "Editorial Image",
+          subTitle: "string",
+          menuTitle: "string",
+          date: "string",
+          size: "string",
+          feature: "string",
+        },
+        {
+          type: "image",
+          id: 1,
+          src: "string",
+          title: "Editorial Image",
+          subTitle: "string",
+          menuTitle: "string",
+          date: "string",
+          size: "string",
+          feature: "string",
+        },
+        {
+          type: "image",
+          id: 2,
+          src: "string",
+          title: "Editorial Image",
+          subTitle: "string",
+          menuTitle: "string",
+          date: "string",
+          size: "string",
+          feature: "string",
+        },
+        {
+          type: "image",
+          id: 3,
+          src: "string",
+          title: "Editorial Image",
+          subTitle: "string",
+          menuTitle: "string",
+          date: "string",
+          size: "string",
+          feature: "string",
+        },
+        {
+          type: "image",
+          id: 4,
+          src: "string",
+          title: "Editorial Image",
+          subTitle: "string",
+          menuTitle: "string",
+          date: "string",
+          size: "string",
+          feature: "string",
+        },
+      ],
+    ],
+    More: [
+      [
+        {
+          type: "image",
+          id: 0,
+          src: "string",
+          title: "More Image",
+          subTitle: "string",
+          menuTitle: "string",
+          date: "string",
+          size: "string",
+          feature: "string",
+        },
+        {
+          type: "image",
+          id: 1,
+          src: "string",
+          title: "More Image",
+          subTitle: "string",
+          menuTitle: "string",
+          date: "string",
+          size: "string",
+          feature: "string",
+        },
+      ],
+    ],
   };
-  const [selectedImageIndex, setSelectedImageIndex] = React.useState<
-    number | undefined
-  >(undefined);
-  const handleNextImageClick = React.useCallback(() => {
-    if (selectedImageIndex) {
-      setSelectedImageIndex(selectedImageIndex + 1);
-    }
-  }, [selectedImageIndex]);
-  const handlePrevImageClick = React.useCallback(() => {
-    if (selectedImageIndex) {
-      setSelectedImageIndex(selectedImageIndex - 1);
-    }
-  }, [selectedImageIndex]);
-  const handleBackButtonClick = React.useCallback(() => {
-    setSelectedImageIndex(undefined);
-  }, []);
-  const photographySelectedImage = React.useMemo(
-    () =>
-      selectedImageIndex !== undefined
-        ? [
-            contents.Photography.reduce(
-              (result, current) => result.concat(current),
-              []
-            )[selectedImageIndex],
-          ]
-        : [],
-    [contents.Photography, selectedImageIndex]
-  );
-  const editorialSelectedImage = React.useMemo(
-    () =>
-      selectedImageIndex !== undefined
-        ? [
-            contents.Editorial.reduce(
-              (result, current) => result.concat(current),
-              []
-            )[selectedImageIndex],
-          ]
-        : [],
-    [contents.Editorial, selectedImageIndex]
-  );
-  const moreSelectedImage = React.useMemo(
-    () => contents.More.reduce((result, current) => result.concat(current), []),
-    [contents.More]
-  );
-
-  // TODO image s3에서 받아오면
-  const visibleNextButton = true;
-  const visiblePrevButton = true;
 
   return (
     <Router history={history}>
@@ -78,91 +147,21 @@ function RootComponent() {
       <GlobalAppBar>
         <Switch>
           <Route path="/photography">
-            <PageTemplate
-              selectedImages={photographySelectedImage}
-              visibleNextButton={visibleNextButton}
-              visiblePrevButton={visiblePrevButton}
-              handleBackButtonClick={handleBackButtonClick}
-              handleNextImageClick={handleNextImageClick}
-              handlePrevImageClick={handlePrevImageClick}
-            >
-              {() => (
-                <SubMenu>
-                  {contents.Photography.map((category) => (
-                    <Category>
-                      {category.map((image) => (
-                        <SubMenuItem>{image.menuTitle}</SubMenuItem>
-                      ))}
-                    </Category>
-                  ))}
-                </SubMenu>
-              )}
-            </PageTemplate>
+            <Photography images={contents.Photography} />
           </Route>
           <Route path="/editorial">
-            <PageTemplate
-              selectedImages={editorialSelectedImage}
-              visibleNextButton={visibleNextButton}
-              visiblePrevButton={visiblePrevButton}
-              handleBackButtonClick={handleBackButtonClick}
-              handleNextImageClick={handleNextImageClick}
-              handlePrevImageClick={handlePrevImageClick}
-            >
-              {() => (
-                <SubMenu>
-                  {contents.Editorial.map((category) => (
-                    <Category>
-                      {category.map((image) => (
-                        <SubMenuItem>{image.menuTitle}</SubMenuItem>
-                      ))}
-                    </Category>
-                  ))}
-                </SubMenu>
-              )}
-            </PageTemplate>
+            <Editorial images={contents.Editorial} />
           </Route>
           <Route path="/more">
-            <PageTemplate
-              selectedImages={moreSelectedImage}
-              visibleNextButton={visibleNextButton}
-              visiblePrevButton={visiblePrevButton}
-              visibleBackButton={false}
-              handleBackButtonClick={handleBackButtonClick}
-              handleNextImageClick={handleNextImageClick}
-              handlePrevImageClick={handlePrevImageClick}
-            ></PageTemplate>
+            <More images={contents.More} />
           </Route>
           <Route path="/">
-            <PageTemplate
-              selectedImages={[]}
-              visibleNextButton={false}
-              visiblePrevButton={false}
-              visibleBackButton={false}
-              handleBackButtonClick={handleBackButtonClick}
-            >
-              <MainContents />
-            </PageTemplate>
+            <Main images={[]} />
           </Route>
         </Switch>
       </GlobalAppBar>
     </Router>
   );
 }
-
-const SubMenu = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Category = styled.div`
-  margin-bottom: 16px;
-`;
-
-const SubMenuItem = styled.div<{ selected?: boolean }>`
-  font-size: 15px;
-  line-height: 1.35;
-  letter-spacing: 0.65px;
-  color: grey;
-`;
 
 export default RootComponent;

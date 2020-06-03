@@ -5,37 +5,37 @@ import useIsMobile from "../../hooks/useIsMobile";
 
 interface IProps {
   selectedImages: Common.Image[];
-  visibleNextButton: boolean;
-  visiblePrevButton: boolean;
   visibleBackButton?: boolean;
-  handleBackButtonClick(): void;
-  handleNextImageClick?(): void;
-  handlePrevImageClick?(): void;
+  handleBackButtonClick?(): void;
+  handleNextButtonClick?(): void;
+  handlePrevButtonClick?(): void;
 }
 const PageTemplate: React.FC<React.PropsWithChildren<IProps>> = ({
   selectedImages,
-  visibleNextButton,
-  visiblePrevButton,
   visibleBackButton = true,
   handleBackButtonClick,
-  handleNextImageClick,
-  handlePrevImageClick,
+  handleNextButtonClick,
+  handlePrevButtonClick,
   children,
 }) => {
   const isMobile = useIsMobile();
+  const isShowBackButton =
+    isMobile && Boolean(selectedImages.length) && visibleBackButton;
+  const isMainPanel = !isMobile || !selectedImages.length;
+  const isMainImagePanel = Boolean(selectedImages.length);
   return (
     <Wrapper>
-      {isMobile && Boolean(selectedImages.length) && visibleBackButton && (
-        <BackButton onClick={handleBackButtonClick} />
-      )}
-      {(!isMobile || !selectedImages.length) && <Main>{children}</Main>}
-      {Boolean(selectedImages.length) && (
+      {isShowBackButton && <BackButton onClick={handleBackButtonClick} />}
+      {isMainPanel && <Main>{children}</Main>}
+      {isMainImagePanel && (
         <ImageWrapper>
-          <Image
-            images={selectedImages}
-            handleNext={visibleNextButton ? handleNextImageClick : undefined}
-            handlePrev={visiblePrevButton ? handlePrevImageClick : undefined}
-          />
+          {(selectedImages || []).map((image) => (
+            <Image
+              image={image}
+              handleNext={handleNextButtonClick}
+              handlePrev={handlePrevButtonClick}
+            />
+          ))}
         </ImageWrapper>
       )}
     </Wrapper>

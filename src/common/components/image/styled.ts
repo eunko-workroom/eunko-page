@@ -3,7 +3,6 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
 `;
 
 export const Image = styled.div`
@@ -14,11 +13,10 @@ export const Image = styled.div`
 `;
 
 export const Content = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
   position: relative;
-  margin-top: 16px;
+  margin: 16px 0;
 `;
 
 export const LeftButton = styled.div`
