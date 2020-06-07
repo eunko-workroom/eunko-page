@@ -1,42 +1,67 @@
 import React from "react";
 
-export default function usePageState(images: Common.Image[][]) {
-  const [selectedImageId, setSelectedImageId] = React.useState<
+export function useSelectedMenuState(menu: Common.ISubMenu[]) {
+  const [selectedMenuId, setSelectedMenuId] = React.useState<
     number | undefined
   >(undefined);
-  const imageArray = React.useMemo(
-    () => images.reduce((result, current) => result.concat(current), []),
-    [images]
-  );
-  const selectedImageIndex = React.useMemo(
-    () => imageArray.findIndex((image) => image.id === selectedImageId),
-    [imageArray, selectedImageId]
-  );
-  const selectedImage = imageArray[selectedImageIndex];
+
+  const sortByCategory = menu.reduce((result, current) => {
+    const lastCategoryMenu = result[result.length - 1] || [];
+    const lastCategory = lastCategoryMenu[0] && lastCategoryMenu[0].category;
+    if (current.category === lastCategory) {
+      lastCategoryMenu.push(current);
+    } else {
+      result.push([current]);
+    }
+
+    return result;
+  }, [] as Common.ISubMenu[][]);
 
   const handleBackButtonClick = React.useCallback(() => {
-    setSelectedImageId(undefined);
+    setSelectedMenuId(undefined);
   }, []);
-  const handleNextButtonClick = React.useCallback(() => {
-    if (selectedImageIndex !== undefined) {
-      const nextImage = imageArray[selectedImageIndex + 1];
-      setSelectedImageId(nextImage.id);
-    }
-  }, [imageArray, selectedImageIndex]);
-  const handlePrevButtonClick = React.useCallback(() => {
-    if (selectedImageIndex !== undefined) {
-      const prevImage = imageArray[selectedImageIndex - 1];
-      setSelectedImageId(prevImage.id);
-    }
-  }, [imageArray, selectedImageIndex]);
 
-  const hideNextButton = selectedImageIndex >= imageArray.length - 1;
-  const hidePrevButton = selectedImageIndex <= 0;
+  const selectedMenu =
+    selectedMenuId !== undefined ? menu[selectedMenuId] : undefined;
 
   return {
-    imageArray,
-    selectedImage,
+    selectedMenuId,
+    sortByCategory,
+    selectedMenu,
+    setSelectedMenuId,
     handleBackButtonClick,
+  };
+}
+
+export function useSelectedImageState(selectedMenu?: Common.ISubMenu) {
+  const [selectedImageId, setSelectedImageId] = React.useState<number>(0);
+
+  const selectedImage = selectedMenu
+    ? selectedMenu.images[selectedImageId]
+    : undefined;
+
+  const handleNextButtonClick = React.useCallback(() => {
+    if (selectedImageId !== undefined) {
+      const nextImage = selectedMenu?.images[selectedImageId + 1];
+      setSelectedImageId(nextImage?.id || 0);
+    }
+  }, [selectedImageId, selectedMenu]);
+  const handlePrevButtonClick = React.useCallback(() => {
+    if (selectedImageId !== undefined) {
+      const prevImage = selectedMenu?.images[selectedImageId - 1];
+      setSelectedImageId(prevImage?.id || 0);
+    }
+  }, [selectedImageId, selectedMenu]);
+
+  const hideNextButton =
+    selectedImageId !== undefined && selectedMenu !== undefined
+      ? selectedImageId >= selectedMenu?.images.length - 1
+      : false;
+  const hidePrevButton =
+    selectedImageId !== undefined ? selectedImageId <= 0 : false;
+
+  return {
+    selectedImage,
     handleNextButtonClick,
     handlePrevButtonClick,
     hideNextButton,

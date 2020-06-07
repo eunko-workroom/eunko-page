@@ -22,6 +22,12 @@ declare namespace Common {
     feature: string;
   }
 
+  interface ISubMenu {
+    id: number;
+    category: string;
+    menuTitle: string;
+    images: Image[];
+  }
   // 중간에 margin이 있어서 2차원 배열
-  type TabContent = Record<MenuType, Image[][]>;
+  type TabContent = Record<MenuType, ISubMenu[]>;
 }

@@ -12,33 +12,43 @@ import {
   Size,
   Feature,
 } from "./styled";
+import { useSelectedImageState } from "../../hooks/usePageState";
 
 interface IProps {
-  image: Common.Image;
-  handleNext?(): void;
-  handlePrev?(): void;
+  menu: Common.ISubMenu;
 }
 
-const ImageController: React.FC<IProps> = ({
-  image,
-  handleNext,
-  handlePrev,
-}) => {
+const ImageController: React.FC<IProps> = ({ menu }) => {
+  const {
+    handlePrevButtonClick,
+    handleNextButtonClick,
+    hideNextButton,
+    hidePrevButton,
+    selectedImage,
+  } = useSelectedImageState(menu);
+  if (!selectedImage) {
+    return null;
+  }
+
   return (
     <Wrapper>
       <Image />
       <Content>
         <ButtonWrapper>
-          {handlePrev && <LeftButton onClick={handlePrev}></LeftButton>}
-          {handleNext && <RightButton onClick={handleNext}></RightButton>}
+          {!hidePrevButton && (
+            <LeftButton onClick={handlePrevButtonClick}></LeftButton>
+          )}
+          {!hideNextButton && (
+            <RightButton onClick={handleNextButtonClick}></RightButton>
+          )}
         </ButtonWrapper>
-        <Title>{image.title}</Title>
-        {image.type === "image" && (
+        <Title>{selectedImage.title}</Title>
+        {selectedImage.type === "image" && (
           <>
-            <SubTitle>{image.subTitle}</SubTitle>
-            <Date>{image.date}</Date>
-            <Size>{image.size}</Size>
-            <Feature>{image.feature}</Feature>
+            <SubTitle>{selectedImage.subTitle}</SubTitle>
+            <Date>{selectedImage.date}</Date>
+            <Size>{selectedImage.size}</Size>
+            <Feature>{selectedImage.feature}</Feature>
           </>
         )}
       </Content>

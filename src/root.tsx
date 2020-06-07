@@ -18,127 +18,74 @@ function RootComponent() {
 
   const contents: Common.TabContent = {
     Photography: [
-      [
-        {
-          type: "image",
-          id: 0,
-          src: "string",
-          title: "Photography Image 1",
-          subTitle: "string",
-          menuTitle: "sub Menu 1",
-          date: "string",
-          size: "string",
-          feature: "string",
-        },
-        {
-          type: "image",
-          id: 1,
-          src: "string",
-          title: "Photography Image 2",
-          subTitle: "string",
-          menuTitle: "sub Menu 2",
-          date: "string",
-          size: "string",
-          feature: "string",
-        },
-        {
-          type: "image",
-          id: 2,
-          src: "string",
-          title: "Photography Image 3",
-          subTitle: "string",
-          menuTitle: "sub Menu 3",
-          date: "string",
-          size: "string",
-          feature: "string",
-        },
-      ],
+      {
+        category: "category",
+        id: 0,
+        menuTitle: "SubMenu",
+        images: [
+          {
+            type: "image",
+            id: 0,
+            src: "string",
+            title: "Photography Image 1",
+            subTitle: "string",
+            menuTitle: "sub Menu 1",
+            date: "string",
+            size: "string",
+            feature: "string",
+          },
+          {
+            type: "image",
+            id: 1,
+            src: "string",
+            title: "Photography Image 2",
+            subTitle: "string",
+            menuTitle: "sub Menu 2",
+            date: "string",
+            size: "string",
+            feature: "string",
+          },
+          {
+            type: "image",
+            id: 2,
+            src: "string",
+            title: "Photography Image 3",
+            subTitle: "string",
+            menuTitle: "sub Menu 3",
+            date: "string",
+            size: "string",
+            feature: "string",
+          },
+        ],
+      },
+
+      {
+        category: "category",
+        id: 1,
+        menuTitle: "SubMenu2",
+        images: [],
+      },
+      {
+        category: "category",
+        id: 2,
+        menuTitle: "SubMenu3",
+        images: [],
+      },
+      {
+        category: "category",
+        id: 3,
+        menuTitle: "SubMenu4",
+        images: [],
+      },
+      {
+        category: "category",
+        id: 4,
+        menuTitle: "SubMenu5",
+        images: [],
+      },
     ],
-    Editorial: [
-      [
-        {
-          type: "image",
-          id: 0,
-          src: "string",
-          title: "Editorial Image",
-          subTitle: "string",
-          menuTitle: "string",
-          date: "string",
-          size: "string",
-          feature: "string",
-        },
-        {
-          type: "image",
-          id: 1,
-          src: "string",
-          title: "Editorial Image",
-          subTitle: "string",
-          menuTitle: "string",
-          date: "string",
-          size: "string",
-          feature: "string",
-        },
-        {
-          type: "image",
-          id: 2,
-          src: "string",
-          title: "Editorial Image",
-          subTitle: "string",
-          menuTitle: "string",
-          date: "string",
-          size: "string",
-          feature: "string",
-        },
-        {
-          type: "image",
-          id: 3,
-          src: "string",
-          title: "Editorial Image",
-          subTitle: "string",
-          menuTitle: "string",
-          date: "string",
-          size: "string",
-          feature: "string",
-        },
-        {
-          type: "image",
-          id: 4,
-          src: "string",
-          title: "Editorial Image",
-          subTitle: "string",
-          menuTitle: "string",
-          date: "string",
-          size: "string",
-          feature: "string",
-        },
-      ],
-    ],
-    More: [
-      [
-        {
-          type: "image",
-          id: 0,
-          src: "string",
-          title: "More Image",
-          subTitle: "string",
-          menuTitle: "string",
-          date: "string",
-          size: "string",
-          feature: "string",
-        },
-        {
-          type: "image",
-          id: 1,
-          src: "string",
-          title: "More Image",
-          subTitle: "string",
-          menuTitle: "string",
-          date: "string",
-          size: "string",
-          feature: "string",
-        },
-      ],
-    ],
+    Editorial: [],
+    More: [],
   };
 
   return (
@@ -147,13 +94,13 @@ function RootComponent() {
       <GlobalAppBar>
         <Switch>
           <Route path="/photography">
-            <Photography images={contents.Photography} />
+            <Photography menu={contents.Photography} />
           </Route>
           <Route path="/editorial">
-            <Editorial images={contents.Editorial} />
+            <Editorial menu={contents.Editorial} />
           </Route>
           <Route path="/more">
-            <More images={contents.More} />
+            <More menu={contents.More} />
           </Route>
           <Route path="/">
             <Main images={[]} />

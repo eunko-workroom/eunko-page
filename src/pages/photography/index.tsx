@@ -5,40 +5,31 @@ import {
   Category,
   SubMenuItem,
 } from "../../common/components/subMenu";
-import usePageState from "../../common/hooks/usePageState";
+import { useSelectedMenuState } from "../../common/hooks/usePageState";
 
-export default function Photography({ images }: { images: Common.Image[][] }) {
+export default function Photography({ menu }: { menu: Common.ISubMenu[] }) {
   const {
-    selectedImage,
+    sortByCategory,
+    selectedMenu,
+    selectedMenuId,
+    setSelectedMenuId,
     handleBackButtonClick,
-    hideNextButton,
-    handleNextButtonClick,
-    hidePrevButton,
-    handlePrevButtonClick,
-    setSelectedImageId,
-  } = usePageState(images);
+  } = useSelectedMenuState(menu);
+  console.log(selectedMenu);
   return (
     <PageTemplate
-      selectedImages={selectedImage ? [selectedImage] : []}
+      menu={selectedMenu !== undefined ? [selectedMenu] : undefined}
       handleBackButtonClick={handleBackButtonClick}
-      handleNextButtonClick={
-        !hideNextButton ? handleNextButtonClick : undefined
-      }
-      handlePrevButtonClick={
-        !hidePrevButton ? handlePrevButtonClick : undefined
-      }
     >
       <SubMenu>
-        {images.map((category) => (
+        {sortByCategory.map((category) => (
           <Category>
-            {category.map((image) => (
+            {category.map((menu) => (
               <SubMenuItem
-                title={image.menuTitle}
-                id={image.id}
-                selected={
-                  Boolean(selectedImage) && image.id === selectedImage?.id
-                }
-                handleClick={setSelectedImageId}
+                title={menu.menuTitle}
+                id={menu.id}
+                selected={menu.id === selectedMenuId}
+                handleClick={setSelectedMenuId}
               />
             ))}
           </Category>
