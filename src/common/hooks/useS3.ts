@@ -6,6 +6,7 @@ import {
   accessKeyId,
   secretAccessKey,
 } from "../constants/s3";
+import AWS, { AWSError, S3 } from "aws-sdk";
 
 export function useGetAlbumsFromS3() {
   const [albums, setAlbums] = useState<Common.TabContent>({
@@ -14,7 +15,7 @@ export function useGetAlbumsFromS3() {
     More: [],
   });
   useEffect(() => {
-    const s3 = new (window as any).AWS.S3({
+    const s3 = new AWS.S3({
       apiVersion: apiVersion,
       params: {
         Bucket: bucketName,
@@ -24,27 +25,24 @@ export function useGetAlbumsFromS3() {
       region: bucketRegion,
     });
 
-    s3.listObjects({}, (err: Error, data: { CommonPrefixes: any[] }) => {
-      if (err) {
-        window.console.log(err.message, err);
-      } else {
-        console.log("!!!!", data);
-        var albums = data.CommonPrefixes.map((commonPrefix) => {
-          var prefix = commonPrefix.Prefix;
-          var albumName = decodeURIComponent(prefix.replace("/", ""));
-          return albumName;
-        });
-        window.console.log("albums", albums);
+    s3.listObjects(
+      { Bucket: bucketName },
+      (err: AWSError, data: S3.Types.ListObjectsOutput) => {
+        if (err) {
+          window.console.log(err.message);
+        } else {
+          window.console.log("albums", data);
+        }
       }
-    });
+    );
   }, []);
 
   return albums;
 }
 
 export function useUploadImage() {
-  return useCallback((buffer: any, name: any, type: any, id: string) => {
-    const s3 = new (window as any).AWS.S3({
+  return useCallback((buffer: File, name: any, type: any, id: string) => {
+    const s3 = new AWS.S3({
       apiVersion: apiVersion,
       params: {
         Bucket: bucketName,
@@ -54,7 +52,7 @@ export function useUploadImage() {
       region: bucketRegion,
     });
 
-    const params = {
+    const params: S3.Types.PutObjectRequest = {
       ACL: "public-read",
       Body: buffer,
       Bucket: bucketName,

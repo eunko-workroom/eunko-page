@@ -129,7 +129,7 @@ export default function UploadFile({
         {
           type: "image",
           id: imageId,
-          src: uploadedImage as string,
+          src: uploadedImage.Location,
           title: imageTitle,
           subTitle: imageSubTitle,
           date: imageDate,
