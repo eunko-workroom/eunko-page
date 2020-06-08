@@ -14,7 +14,11 @@ export default createGlobalStyle`
   body {
     margin: 0;
     -webkit-overflow-scrolling: touch;
-    font-family: -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, "Segoe ui", "Roboto", "Helvetica Neue", sans-serif;
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    letter-spacing: 0.65px;
+    line-height: 1.35;
   }
   html,
   body,
@@ -24,6 +28,7 @@ export default createGlobalStyle`
   }
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
+    font-weight: 300;
   }
   li {
     list-style: none;

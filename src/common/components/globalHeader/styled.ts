@@ -24,6 +24,7 @@ export const Main = styled.div<{ margin?: number }>`
 
 export const Logo = styled.h1`
   font-weight: normal;
+  font-size: 17px;
   margin-right: 16px;
 `;
 
@@ -42,13 +43,12 @@ export const Nav = styled.nav`
   margin-left: 16px;
   font-size: 17px;
   line-height: 1.35;
-  letter-spacing: 0.65px;
-  color: grey;
+  color: #c4c4c4;
 
   & > ${MenuItem} + ${MenuItem} {
     &::before {
       content: "/";
-      color: grey;
+      color: #c4c4c4;
       margin: 0 4px;
     }
   }

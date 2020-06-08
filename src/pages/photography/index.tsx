@@ -15,7 +15,6 @@ export default function Photography({ menu }: { menu: Common.ISubMenu[] }) {
     setSelectedMenuId,
     handleBackButtonClick,
   } = useSelectedMenuState(menu);
-  console.log(selectedMenu);
   return (
     <PageTemplate
       menu={selectedMenu !== undefined ? [selectedMenu] : undefined}
@@ -24,7 +23,7 @@ export default function Photography({ menu }: { menu: Common.ISubMenu[] }) {
       <SubMenu>
         {sortByCategory.map((category) => (
           <Category>
-            {category.map((menu) => (
+            {category.menus.map((menu) => (
               <SubMenuItem
                 title={menu.menuTitle}
                 id={menu.id}

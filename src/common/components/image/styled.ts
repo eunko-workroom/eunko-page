@@ -9,7 +9,7 @@ export const Image = styled.div`
   object-fit: cover;
   width: 100%;
   height: 500px;
-  background-color: grey;
+  background-color: #c4c4c4;
 `;
 
 export const Content = styled.div`
@@ -22,34 +22,44 @@ export const Content = styled.div`
 export const LeftButton = styled.div`
   width: 16px;
   height: 24px;
-  background-color: grey;
+  background-color: #c4c4c4;
+  position: absolute;
+  top: 0;
+  right: 32px;
 `;
 export const RightButton = styled.div`
   width: 16px;
   height: 24px;
-  background-color: grey;
-`;
-
-export const ButtonWrapper = styled.div`
-  display: flex;
+  background-color: #c4c4c4;
   position: absolute;
   top: 0;
   right: 0;
-  & > ${LeftButton} + ${RightButton} {
-    margin-left: 16px;
-  }
 `;
 
 export const Title = styled.h1`
-  font-weight: normal;
   margin-bottom: 16px;
+`;
+
+export const ImageInfo = styled.div`
+  display: flex;
+`;
+
+export const Left = styled.div`
+  text-align: left;
+  margin-right: 16px;
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Right = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Text = styled.span`
   font-size: 15px;
-  line-height: 1.35;
-  letter-spacing: 0.65px;
-  color: grey;
+  color: #c4c4c4;
 `;
 
 export const SubTitle = styled(Text)``;

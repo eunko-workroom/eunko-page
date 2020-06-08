@@ -3,7 +3,6 @@ import {
   Wrapper,
   Image,
   Content,
-  ButtonWrapper,
   LeftButton,
   RightButton,
   Title,
@@ -11,6 +10,9 @@ import {
   Date,
   Size,
   Feature,
+  ImageInfo,
+  Left,
+  Right,
 } from "./styled";
 import { useSelectedImageState } from "../../hooks/usePageState";
 
@@ -34,21 +36,28 @@ const ImageController: React.FC<IProps> = ({ menu }) => {
     <Wrapper>
       <Image />
       <Content>
-        <ButtonWrapper>
-          {!hidePrevButton && (
-            <LeftButton onClick={handlePrevButtonClick}></LeftButton>
-          )}
-          {!hideNextButton && (
-            <RightButton onClick={handleNextButtonClick}></RightButton>
-          )}
-        </ButtonWrapper>
+        {!hidePrevButton && (
+          <LeftButton onClick={handlePrevButtonClick}></LeftButton>
+        )}
+        {!hideNextButton && (
+          <RightButton onClick={handleNextButtonClick}></RightButton>
+        )}
         <Title>{selectedImage.title}</Title>
         {selectedImage.type === "image" && (
           <>
             <SubTitle>{selectedImage.subTitle}</SubTitle>
-            <Date>{selectedImage.date}</Date>
-            <Size>{selectedImage.size}</Size>
-            <Feature>{selectedImage.feature}</Feature>
+            <ImageInfo>
+              <Left>
+                <Date>Date</Date>
+                <Size>Size</Size>
+                <Feature>Feature</Feature>
+              </Left>
+              <Right>
+                <Date>{selectedImage.date}</Date>
+                <Size>{selectedImage.size}</Size>
+                <Feature>{selectedImage.feature}</Feature>
+              </Right>
+            </ImageInfo>
           </>
         )}
       </Content>

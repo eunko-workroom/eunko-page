@@ -3,9 +3,9 @@ import { SubMenu, Category, SubMenuItemWrapper } from "./styled";
 
 export const SubMenuItem: React.FC<{
   title: string;
-  id: number;
+  id: string;
   selected: boolean;
-  handleClick(id: number): void;
+  handleClick(id: string): void;
 }> = ({ title, id, selected, handleClick }) => {
   const onClick = React.useCallback(() => {
     handleClick(id);

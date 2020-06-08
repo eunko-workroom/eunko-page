@@ -20,7 +20,7 @@ export const Main = styled.div`
 export const BackButton = styled.div`
   width: 24px;
   height: 24px;
-  background-color: grey;
+  background-color: #c4c4c4;
   position: absolute;
   top: 0;
   left: 16px;

@@ -22,7 +22,7 @@ export default function Editorial({ menu }: { menu: Common.ISubMenu[] }) {
       <SubMenu>
         {sortByCategory.map((category) => (
           <Category>
-            {category.map((image) => (
+            {category.menus.map((image) => (
               <SubMenuItem
                 title={image.menuTitle}
                 id={image.id}

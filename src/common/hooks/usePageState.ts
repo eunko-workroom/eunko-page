@@ -1,28 +1,30 @@
 import React from "react";
 
 export function useSelectedMenuState(menu: Common.ISubMenu[]) {
-  const [selectedMenuId, setSelectedMenuId] = React.useState<
-    number | undefined
-  >(undefined);
+  const [selectedMenuId, setSelectedMenuId] = React.useState<string>("");
 
   const sortByCategory = menu.reduce((result, current) => {
-    const lastCategoryMenu = result[result.length - 1] || [];
-    const lastCategory = lastCategoryMenu[0] && lastCategoryMenu[0].category;
-    if (current.category === lastCategory) {
-      lastCategoryMenu.push(current);
+    const sameCategory = result.find(
+      (target) => target.category === current.category
+    );
+
+    if (sameCategory) {
+      sameCategory.menus.push(current);
     } else {
-      result.push([current]);
+      result.push({ category: current.category, menus: [current] });
     }
 
     return result;
-  }, [] as Common.ISubMenu[][]);
+  }, [] as Common.ISortByCategory[]);
 
   const handleBackButtonClick = React.useCallback(() => {
-    setSelectedMenuId(undefined);
+    setSelectedMenuId("");
   }, []);
 
   const selectedMenu =
-    selectedMenuId !== undefined ? menu[selectedMenuId] : undefined;
+    selectedMenuId !== undefined
+      ? menu.find((target) => target.id === selectedMenuId)
+      : undefined;
 
   return {
     selectedMenuId,
@@ -33,32 +35,35 @@ export function useSelectedMenuState(menu: Common.ISubMenu[]) {
   };
 }
 
-export function useSelectedImageState(selectedMenu?: Common.ISubMenu) {
-  const [selectedImageId, setSelectedImageId] = React.useState<number>(0);
-
-  const selectedImage = selectedMenu
-    ? selectedMenu.images[selectedImageId]
-    : undefined;
+export function useSelectedImageState(selectedMenu: Common.ISubMenu) {
+  const [selectedImageId, setSelectedImageId] = React.useState<string>(
+    selectedMenu.images[0] ? selectedMenu.images[0].id : ""
+  );
+  const selectedImageIndex = React.useMemo(
+    () =>
+      selectedMenu.images.findIndex((target) => target.id === selectedImageId),
+    [selectedImageId, selectedMenu.images]
+  );
+  const selectedImage =
+    selectedImageIndex >= 0
+      ? selectedMenu.images[selectedImageIndex]
+      : undefined;
 
   const handleNextButtonClick = React.useCallback(() => {
-    if (selectedImageId !== undefined) {
-      const nextImage = selectedMenu?.images[selectedImageId + 1];
-      setSelectedImageId(nextImage?.id || 0);
+    if (selectedImageIndex >= 0) {
+      const nextImage = selectedMenu?.images[selectedImageIndex + 1];
+      setSelectedImageId(nextImage.id);
     }
-  }, [selectedImageId, selectedMenu]);
+  }, [selectedImageIndex, selectedMenu]);
   const handlePrevButtonClick = React.useCallback(() => {
-    if (selectedImageId !== undefined) {
-      const prevImage = selectedMenu?.images[selectedImageId - 1];
-      setSelectedImageId(prevImage?.id || 0);
+    if (selectedImageIndex >= 0) {
+      const prevImage = selectedMenu?.images[selectedImageIndex - 1];
+      setSelectedImageId(prevImage.id);
     }
-  }, [selectedImageId, selectedMenu]);
+  }, [selectedImageIndex, selectedMenu]);
 
-  const hideNextButton =
-    selectedImageId !== undefined && selectedMenu !== undefined
-      ? selectedImageId >= selectedMenu?.images.length - 1
-      : false;
-  const hidePrevButton =
-    selectedImageId !== undefined ? selectedImageId <= 0 : false;
+  const hideNextButton = selectedImageIndex >= selectedMenu.images.length - 1;
+  const hidePrevButton = selectedImageIndex <= 0;
 
   return {
     selectedImage,

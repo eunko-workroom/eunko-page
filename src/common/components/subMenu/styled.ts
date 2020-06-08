@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const SubMenu = styled.div`
   display: flex;
@@ -11,8 +11,13 @@ export const Category = styled.div`
 
 export const SubMenuItemWrapper = styled.div<{ selected?: boolean }>`
   font-size: 15px;
-  line-height: 1.35;
-  letter-spacing: 0.65px;
-  color: grey;
+
+  color: #c4c4c4;
   cursor: pointer;
+
+  ${(props) =>
+    props.selected &&
+    css`
+      color: black;
+    `}
 `;

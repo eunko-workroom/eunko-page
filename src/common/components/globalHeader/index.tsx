@@ -9,8 +9,7 @@ const GlobalAppBar: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const photographyRef = React.useRef<HTMLAnchorElement>(null);
   const editorialRef = React.useRef<HTMLAnchorElement>(null);
   const moreRef = React.useRef<HTMLAnchorElement>(null);
-
-  const getMainPosition = React.useCallback(() => {
+  const mainPosition = React.useMemo(() => {
     switch (menu) {
       case "photography":
         return photographyRef.current?.offsetLeft;
@@ -19,8 +18,7 @@ const GlobalAppBar: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
       case "more":
         return moreRef.current?.offsetLeft;
     }
-    return 16;
-  }, [menu, photographyRef, editorialRef, moreRef]);
+  }, [menu]);
 
   return (
     <Wrapper>
@@ -46,7 +44,7 @@ const GlobalAppBar: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
           </MenuItem>
         </Nav>
       </Header>
-      <Main margin={getMainPosition()}>{children}</Main>
+      <Main margin={mainPosition || 16}>{children}</Main>
     </Wrapper>
   );
 };

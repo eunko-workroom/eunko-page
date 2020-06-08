@@ -4,30 +4,34 @@ declare namespace Common {
 
   interface IOnlyImage {
     type: "nonDescriptionImage";
-    id: number;
+    id: string;
     title: string;
-    menuTitle: string;
+
     src: string;
   }
 
   interface IImageWithDescription {
     type: "image";
-    id: number;
+    id: string;
     src: string;
     title: string;
     subTitle: string;
-    menuTitle: string;
     date: string;
     size: string;
     feature: string;
   }
 
   interface ISubMenu {
-    id: number;
+    id: string;
     category: string;
     menuTitle: string;
     images: Image[];
   }
-  // 중간에 margin이 있어서 2차원 배열
+
   type TabContent = Record<MenuType, ISubMenu[]>;
+
+  interface ISortByCategory {
+    category: string;
+    menus: ISubMenu[];
+  }
 }
