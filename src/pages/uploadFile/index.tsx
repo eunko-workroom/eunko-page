@@ -260,7 +260,7 @@ export default function UploadFile({
           />
           <Input
             type="text"
-            placeholder="다른 카테고리와 겹치지 않도록 해주세요"
+            placeholder="다른 서브메뉴들과 겹치지 않도록 해주세요(영어나 숫자만 띄어쓰기 특수문자 제외 !)"
             value={subMenuId}
             onChange={handleChangeSubMenuId}
           />
@@ -284,7 +284,7 @@ export default function UploadFile({
         <Right>
           <Input
             type="text"
-            placeholder="이미 입력한 이미지 아이디와 겹치지 않도록 해주세요"
+            placeholder="이미 입력한 이미지 아이디와 겹치지 않도록 해주세요(영어나 숫자만 띄어쓰기 특수문자 제외 !)"
             value={imageId}
             onChange={handleChangeImageId}
           />
