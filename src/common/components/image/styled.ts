@@ -5,11 +5,9 @@ export const Wrapper = styled.div`
   width: 100%;
 `;
 
-export const Image = styled.div`
+export const Image = styled.img`
   object-fit: cover;
   width: 100%;
-  height: 500px;
-  background-color: #c4c4c4;
 `;
 
 export const Content = styled.div`

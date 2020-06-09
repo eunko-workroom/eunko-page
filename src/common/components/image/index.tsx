@@ -34,7 +34,7 @@ const ImageController: React.FC<IProps> = ({ menu }) => {
 
   return (
     <Wrapper>
-      <Image />
+      <Image src={selectedImage.src} alt={selectedImage.title} />
       <Content>
         {!hidePrevButton && (
           <LeftButton onClick={handlePrevButtonClick}></LeftButton>

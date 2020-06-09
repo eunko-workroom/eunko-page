@@ -1,14 +1,16 @@
 import React from "react";
 
 import { Section, Text, Input, Left, Right } from "./styled";
-import { useUploadImage } from "../../common/hooks/useS3";
+import { useUploadToS3 } from "../../common/hooks/useS3";
+import { safeStringifyJSON } from "../../common/components/helpers/safeJSON";
+import { bucketUrl } from "../../common/constants/s3";
 
 export default function UploadFile({
   contents,
 }: {
   contents: Common.TabContent;
 }) {
-  const uploadFile = useUploadImage();
+  const uploadFile = useUploadToS3();
   const [menu, setMenu] = React.useState<string>("Photography");
   const handleChangeMenu = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -114,22 +116,26 @@ export default function UploadFile({
     },
     []
   );
+  const imageInputRef = React.useRef<HTMLInputElement>(null);
 
   const handleAddImage = React.useCallback(async () => {
-    if (image) {
-      const uploadedImage = await uploadFile(
-        image,
-        image.name,
-        image.type,
-        imageId
-      );
-      console.log(uploadedImage);
+    try {
+      if (!image) {
+        return;
+      }
+
+      const uploadedImage = await uploadFile({
+        Body: image,
+        Key: imageId,
+        Bucket: "eunko.workroom",
+      });
+
       setImages([
         ...images,
         {
           type: "image",
           id: imageId,
-          src: uploadedImage.Location,
+          src: `${bucketUrl}${uploadedImage.Key}`,
           title: imageTitle,
           subTitle: imageSubTitle,
           date: imageDate,
@@ -137,6 +143,19 @@ export default function UploadFile({
           feature: imageFeature,
         },
       ]);
+      alert("업로드 완료");
+
+      setImageId("");
+      setImageTitle("");
+      setImageDate("");
+      setImageFeature("");
+      setImageSize("");
+      setImageSubTitle("");
+      if (imageInputRef.current) {
+        imageInputRef.current.value = "";
+      }
+    } catch (err) {
+      console.error(err);
     }
   }, [
     image,
@@ -149,6 +168,38 @@ export default function UploadFile({
     images,
     uploadFile,
   ]);
+
+  const handleDoneButtonClick = React.useCallback(async () => {
+    if (!subMenuId || !category || !subMenuName || !images.length) {
+      alert("모든 데이터를 채워주세요");
+      return;
+    }
+    const uploadBody = {
+      ...contents,
+      [menu]: [
+        ...contents[menu as Common.MenuType],
+        {
+          id: subMenuId,
+          category: category,
+          menuTitle: subMenuName,
+          images: images,
+        },
+      ],
+    };
+    const stringData = safeStringifyJSON(uploadBody);
+
+    try {
+      await uploadFile({
+        Body: new Blob([stringData], { type: "application/json" }),
+        Key: "project.json",
+        Bucket: "eunko.workroom",
+      });
+
+      alert("업로드 완료");
+    } catch (err) {
+      console.error(err);
+    }
+  }, [category, contents, images, menu, subMenuId, subMenuName, uploadFile]);
 
   return (
     <>
@@ -264,11 +315,16 @@ export default function UploadFile({
             value={imageFeature}
           />
 
-          <Input type="file" accept="image/*" onChange={handleChangeImage} />
+          <Input
+            type="file"
+            accept="image/*"
+            onChange={handleChangeImage}
+            ref={imageInputRef}
+          />
         </Right>
       </Section>
       <Section>
-        <button>완료</button>
+        <button onClick={handleDoneButtonClick}>완료</button>
       </Section>
     </>
   );

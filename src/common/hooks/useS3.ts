@@ -1,4 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
+
+import AWS, { S3 } from "aws-sdk";
 import {
   bucketName,
   bucketRegion,
@@ -6,7 +8,22 @@ import {
   accessKeyId,
   secretAccessKey,
 } from "../constants/s3";
-import AWS, { AWSError, S3 } from "aws-sdk";
+
+function convertUint8Array(arr: Uint8Array) {
+  let str = "";
+  for (var i = 0; i < arr.byteLength; i++) {
+    str += String.fromCharCode(arr[i]);
+  }
+
+  try {
+    const serializedData = JSON.stringify(str);
+    const stringData = JSON.parse(serializedData);
+    const data = JSON.parse(stringData);
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
+}
 
 export function useGetAlbumsFromS3() {
   const [albums, setAlbums] = useState<Common.TabContent>({
@@ -25,23 +42,28 @@ export function useGetAlbumsFromS3() {
       region: bucketRegion,
     });
 
-    s3.listObjects(
-      { Bucket: bucketName },
-      (err: AWSError, data: S3.Types.ListObjectsOutput) => {
-        if (err) {
-          window.console.log(err.message);
-        } else {
-          window.console.log("albums", data);
+    s3.getObject({ Bucket: bucketName, Key: "project.json" }, function (
+      err,
+      data
+    ) {
+      if (err) console.log(err, err.stack);
+      else {
+        if (data.Body) {
+          const albums = convertUint8Array(
+            data.Body as Uint8Array
+          ) as Common.TabContent;
+
+          setAlbums(albums);
         }
       }
-    );
+    });
   }, []);
 
   return albums;
 }
 
-export function useUploadImage() {
-  return useCallback((buffer: File, name: any, type: any, id: string) => {
+export function useUploadToS3() {
+  return useCallback((p: S3.Types.PutObjectRequest) => {
     const s3 = new AWS.S3({
       apiVersion,
       params: {
@@ -52,14 +74,8 @@ export function useUploadImage() {
       region: bucketRegion,
     });
 
-    const params: S3.Types.PutObjectRequest = {
-      ACL: "public-read",
-      Body: buffer,
-      Bucket: bucketName,
-      ContentType: type,
-      Key: id,
-    };
-
-    return s3.upload(params).promise();
+    return s3
+      .upload({ ACL: "public-read", Bucket: bucketName, ...p })
+      .promise();
   }, []);
 }
