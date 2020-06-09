@@ -16,12 +16,12 @@ export function useGetAlbumsFromS3() {
   });
   useEffect(() => {
     const s3 = new AWS.S3({
-      apiVersion: apiVersion,
+      apiVersion,
       params: {
         Bucket: bucketName,
       },
-      accessKeyId: accessKeyId,
-      secretAccessKey: secretAccessKey,
+      accessKeyId,
+      secretAccessKey,
       region: bucketRegion,
     });
 
@@ -43,12 +43,12 @@ export function useGetAlbumsFromS3() {
 export function useUploadImage() {
   return useCallback((buffer: File, name: any, type: any, id: string) => {
     const s3 = new AWS.S3({
-      apiVersion: apiVersion,
+      apiVersion,
       params: {
         Bucket: bucketName,
       },
-      accessKeyId: accessKeyId,
-      secretAccessKey: secretAccessKey,
+      accessKeyId,
+      secretAccessKey,
       region: bucketRegion,
     });
 

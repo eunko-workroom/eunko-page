@@ -1,8 +1,8 @@
 const bucketName = "eunko.workroom";
 const bucketRegion = "ap-northeast-2";
 const apiVersion = "2006-03-01";
-const accessKeyId = "AKIAT4K7DKVDWURUQSEO";
-const secretAccessKey = "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";
+const accessKeyId = "AKIAT4K7DKVD6NFIHTOT";
+const secretAccessKey = "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";
 const bucketUrl = `https://s3.amazonaws.com/${bucketName}/`;
 
 const s3 = new window.AWS.S3({
