@@ -20,7 +20,6 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
     imageDate,
     imageSize,
     imageFeature,
-
     imageInputRef,
   } = hookProps;
   const {

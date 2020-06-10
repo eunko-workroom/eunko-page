@@ -134,6 +134,7 @@ export default function useHandlers(props: IHookProps) {
       const uploadedImage = await uploadFile({
         Body: image,
         Key: imageId,
+        ContentType: image.type,
         Bucket: "eunko.workroom",
       });
 
