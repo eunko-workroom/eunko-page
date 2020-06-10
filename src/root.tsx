@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 import { BrowserRouter } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import GlobalStyle from "./globalStyle";
 import GlobalAppBar from "./common/components/globalHeader";
 import Main from "./pages/main";
@@ -14,6 +15,7 @@ function RootComponent() {
   const contents = useGetAlbumsFromS3();
   return (
     <BrowserRouter>
+      <Helmet title="Eunko Workroom" />
       <GlobalStyle />
       <GlobalAppBar>
         <Switch>
