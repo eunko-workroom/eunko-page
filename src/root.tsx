@@ -1,6 +1,6 @@
 import React from "react";
-import { Router, Route, Switch } from "react-router";
-import { createBrowserHistory, History } from "history";
+import { Route, Switch } from "react-router";
+import { BrowserRouter } from "react-router-dom";
 import GlobalStyle from "./globalStyle";
 import GlobalAppBar from "./common/components/globalHeader";
 import Main from "./pages/main";
@@ -11,12 +11,9 @@ import UploadFile from "./pages/uploadFile";
 import { useGetAlbumsFromS3 } from "./common/hooks/useS3";
 
 function RootComponent() {
-  const history: History = createBrowserHistory();
-
   const contents = useGetAlbumsFromS3();
-
   return (
-    <Router history={history}>
+    <BrowserRouter>
       <GlobalStyle />
       <GlobalAppBar>
         <Switch>
@@ -37,7 +34,7 @@ function RootComponent() {
           </Route>
         </Switch>
       </GlobalAppBar>
-    </Router>
+    </BrowserRouter>
   );
 }
 
