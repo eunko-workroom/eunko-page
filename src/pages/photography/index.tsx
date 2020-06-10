@@ -25,7 +25,7 @@ export default function Photography({ menu }: { menu: Common.ISubMenu[] }) {
           <Category>
             {category.menus.map((menu) => (
               <SubMenuItem
-                title={menu.menuTitle}
+                title={decodeURIComponent(menu.menuTitle)}
                 id={menu.id}
                 selected={menu.id === selectedMenuId}
                 handleClick={setSelectedMenuId}

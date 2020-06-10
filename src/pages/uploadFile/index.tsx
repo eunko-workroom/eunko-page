@@ -38,7 +38,6 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
     handleAddImage,
     handleDoneButtonClick,
   } = hookHandlers;
-  console.log(image?.type);
   return (
     <>
       <Section>

@@ -42,10 +42,10 @@ const ImageController: React.FC<IProps> = ({ menu }) => {
         {!hideNextButton && (
           <RightButton onClick={handleNextButtonClick}></RightButton>
         )}
-        <Title>{selectedImage.title}</Title>
+        <Title>{decodeURIComponent(selectedImage.title)}</Title>
         {selectedImage.type === "image" && (
           <>
-            <SubTitle>{selectedImage.subTitle}</SubTitle>
+            <SubTitle>{decodeURIComponent(selectedImage.subTitle)}</SubTitle>
             <ImageInfo>
               <Left>
                 <Date>Date</Date>
@@ -53,9 +53,9 @@ const ImageController: React.FC<IProps> = ({ menu }) => {
                 <Feature>Feature</Feature>
               </Left>
               <Right>
-                <Date>{selectedImage.date}</Date>
-                <Size>{selectedImage.size}</Size>
-                <Feature>{selectedImage.feature}</Feature>
+                <Date>{decodeURIComponent(selectedImage.date)}</Date>
+                <Size>{decodeURIComponent(selectedImage.size)}</Size>
+                <Feature>{decodeURIComponent(selectedImage.feature)}</Feature>
               </Right>
             </ImageInfo>
           </>

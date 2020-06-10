@@ -145,11 +145,11 @@ export default function useHandlers(props: IHookProps) {
           id: imageId,
 
           src: `${bucketUrl}${uploadedImage.Key}`,
-          title: imageTitle,
-          subTitle: imageSubTitle,
-          date: imageDate,
-          size: imageSize,
-          feature: imageFeature,
+          title: encodeURIComponent(imageTitle),
+          subTitle: encodeURIComponent(imageSubTitle),
+          date: encodeURIComponent(imageDate),
+          size: encodeURIComponent(imageSize),
+          feature: encodeURIComponent(imageFeature),
         },
       ]);
       alert("업로드 완료");
@@ -197,8 +197,8 @@ export default function useHandlers(props: IHookProps) {
         ...contents[menu as Common.MenuType],
         {
           id: subMenuId,
-          category: category,
-          menuTitle: subMenuName,
+          category: encodeURIComponent(category),
+          menuTitle: encodeURIComponent(subMenuName),
           images: images,
         },
       ],
