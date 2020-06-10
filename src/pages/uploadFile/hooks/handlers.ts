@@ -133,17 +133,17 @@ export default function useHandlers(props: IHookProps) {
 
       const uploadedImage = await uploadFile({
         Body: image,
-        Key: imageId,
+        Key: `${imageId}.${image.type.split("/")[1]}`,
         ContentType: image.type,
         Bucket: "eunko.workroom",
         ContentEncoding: "utf-8",
       });
-
       setImages([
         ...images,
         {
           type: "image",
           id: imageId,
+
           src: `${bucketUrl}${uploadedImage.Key}`,
           title: imageTitle,
           subTitle: imageSubTitle,
@@ -210,7 +210,7 @@ export default function useHandlers(props: IHookProps) {
         Body: new Blob([stringData], { type: "application/json" }),
         Key: "project.json",
         Bucket: "eunko.workroom",
-        ContentType: "application/json;charset=utf-8",
+        ContentType: "application/json; charset=UTF-8",
         ContentEncoding: "utf-8",
       });
 

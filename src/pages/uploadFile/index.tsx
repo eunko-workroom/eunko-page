@@ -20,6 +20,7 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
     imageDate,
     imageSize,
     imageFeature,
+    image,
     imageInputRef,
   } = hookProps;
   const {
@@ -37,6 +38,7 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
     handleAddImage,
     handleDoneButtonClick,
   } = hookHandlers;
+  console.log(image?.type);
   return (
     <>
       <Section>
