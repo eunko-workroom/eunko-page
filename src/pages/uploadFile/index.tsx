@@ -7,7 +7,6 @@ import { useProps, useHandlers, useEffects } from "./hooks";
 export default function UploadFile(props: { contents: Common.TabContent }) {
   const hookProps = useProps(props);
   const hookHandlers = useHandlers(hookProps);
-  useEffects();
 
   const {
     menu,
@@ -39,6 +38,20 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
   } = hookHandlers;
   return (
     <>
+      <Section>
+        <Text>
+          여기서 서브메뉴를 생성할 수 있습니다 <br /> 각각의 인풋에 해당하는
+          값을 넣어주신후 맨 마지막에 서브메뉴 생성하기 버튼을 누르면 서브메뉴가
+          생성됩니다.
+          <br />
+          그리고 서브메뉴에 들어가는 각각의 이미지는 아래의 이미지 추가 버튼을
+          통해서 추가할 수 있습니다. 이미지 값을 다 채우신 뒤에 추가 버튼을
+          누르면 만들려고 하는 서브메뉴에 이미지가 추가가 됩니다. 필요하신 만큼
+          추가하시면 됩니다.
+          <br /> (이미지를 추가하시고 마지막에 서브메뉴 생성하기 버튼을
+          누르셔야됩니다.)
+        </Text>
+      </Section>
       <Section>
         <Left>
           <Text>속하는 메뉴 이름</Text>
@@ -102,7 +115,7 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
           />
         </Right>
       </Section>
-
+      <hr />
       <Section>
         <h1>Image 추가</h1>
       </Section>
@@ -159,8 +172,9 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
           />
         </Right>
       </Section>
+      <hr />
       <Section>
-        <button onClick={handleDoneButtonClick}>완료</button>
+        <button onClick={handleDoneButtonClick}>서브메뉴 생성하기</button>
       </Section>
     </>
   );
