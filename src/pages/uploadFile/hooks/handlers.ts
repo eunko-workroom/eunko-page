@@ -136,6 +136,7 @@ export default function useHandlers(props: IHookProps) {
         Key: imageId,
         ContentType: image.type,
         Bucket: "eunko.workroom",
+        ContentEncoding: "utf-8",
       });
 
       setImages([
@@ -209,6 +210,8 @@ export default function useHandlers(props: IHookProps) {
         Body: new Blob([stringData], { type: "application/json" }),
         Key: "project.json",
         Bucket: "eunko.workroom",
+        ContentType: "application/json;charset=utf-8",
+        ContentEncoding: "utf-8",
       });
 
       alert("업로드 완료");
