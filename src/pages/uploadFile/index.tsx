@@ -1,206 +1,43 @@
 import React from "react";
 
 import { Section, Text, Input, Left, Right } from "./styled";
-import { useUploadToS3 } from "../../common/hooks/useS3";
-import { safeStringifyJSON } from "../../common/components/helpers/safeJSON";
-import { bucketUrl } from "../../common/constants/s3";
 
-export default function UploadFile({
-  contents,
-}: {
-  contents: Common.TabContent;
-}) {
-  const uploadFile = useUploadToS3();
-  const [menu, setMenu] = React.useState<string>("Photography");
-  const handleChangeMenu = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setMenu(e.target.value);
-    },
-    []
-  );
-  const selectedMenuData = React.useMemo(
-    () => contents[menu as Common.MenuType],
-    [contents, menu]
-  );
+import { useProps, useHandlers, useEffects } from "./hooks";
 
-  const [category, setCategory] = React.useState<string>("");
-  const handleChangeCategory = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setCategory(e.target.value);
-    },
-    []
-  );
+export default function UploadFile(props: { contents: Common.TabContent }) {
+  const hookProps = useProps(props);
+  const hookHandlers = useHandlers(hookProps);
+  useEffects();
 
-  const [subMenuName, setSubMenuName] = React.useState<string>("");
-  const handleChangeSubMenuName = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setSubMenuName(e.target.value);
-    },
-    []
-  );
-
-  const [subMenuId, setSubMenuId] = React.useState<string>("");
-  const handleChangeSubMenuId = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const id = e.target.value;
-
-      if (selectedMenuData.findIndex((target) => target.id === id) !== -1) {
-        alert("이미 있는 아이디에요 !");
-      } else {
-        setSubMenuId(id);
-      }
-    },
-    [selectedMenuData]
-  );
-
-  const [images, setImages] = React.useState<Common.Image[]>([]);
-
-  const [imageId, setImageId] = React.useState<string>("");
-  const handleChangeImageId = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const id = e.target.value;
-
-      if (images.findIndex((target) => target.id === id) !== -1) {
-        alert("이미 있는 아이디에요 !");
-      } else {
-        setImageId(id);
-      }
-    },
-    [images]
-  );
-
-  const [imageTitle, setImageTitle] = React.useState<string>("");
-  const handleChangeImageTitle = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setImageTitle(e.target.value);
-    },
-    []
-  );
-
-  const [imageSubTitle, setImageSubTitle] = React.useState<string>("");
-  const handleChangeImageSubTitle = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setImageSubTitle(e.target.value);
-    },
-    []
-  );
-
-  const [imageDate, setImageDate] = React.useState<string>("");
-  const handleChangeImageDate = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setImageDate(e.target.value);
-    },
-    []
-  );
-
-  const [imageSize, setImageSize] = React.useState<string>("");
-  const handleChangeImageSize = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setImageSize(e.target.value);
-    },
-    []
-  );
-
-  const [imageFeature, setImageFeature] = React.useState<string>("");
-  const handleChangeImageFeature = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setImageFeature(e.target.value);
-    },
-    []
-  );
-
-  const [image, setImage] = React.useState<File | null>(null);
-  const handleChangeImage = React.useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setImage(e.target.files![0]);
-    },
-    []
-  );
-  const imageInputRef = React.useRef<HTMLInputElement>(null);
-
-  const handleAddImage = React.useCallback(async () => {
-    try {
-      if (!image) {
-        return;
-      }
-
-      const uploadedImage = await uploadFile({
-        Body: image,
-        Key: imageId,
-        Bucket: "eunko.workroom",
-      });
-
-      setImages([
-        ...images,
-        {
-          type: "image",
-          id: imageId,
-          src: `${bucketUrl}${uploadedImage.Key}`,
-          title: imageTitle,
-          subTitle: imageSubTitle,
-          date: imageDate,
-          size: imageSize,
-          feature: imageFeature,
-        },
-      ]);
-      alert("업로드 완료");
-
-      setImageId("");
-      setImageTitle("");
-      setImageDate("");
-      setImageFeature("");
-      setImageSize("");
-      setImageSubTitle("");
-      if (imageInputRef.current) {
-        imageInputRef.current.value = "";
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }, [
-    image,
-    imageDate,
-    imageFeature,
+  const {
+    menu,
+    category,
+    subMenuName,
+    subMenuId,
     imageId,
-    imageSize,
-    imageSubTitle,
     imageTitle,
-    images,
-    uploadFile,
-  ]);
+    imageSubTitle,
+    imageDate,
+    imageSize,
+    imageFeature,
 
-  const handleDoneButtonClick = React.useCallback(async () => {
-    if (!subMenuId || !category || !subMenuName || !images.length) {
-      alert("모든 데이터를 채워주세요");
-      return;
-    }
-    const uploadBody = {
-      ...contents,
-      [menu]: [
-        ...contents[menu as Common.MenuType],
-        {
-          id: subMenuId,
-          category: category,
-          menuTitle: subMenuName,
-          images: images,
-        },
-      ],
-    };
-    const stringData = safeStringifyJSON(uploadBody);
-
-    try {
-      await uploadFile({
-        Body: new Blob([stringData], { type: "application/json" }),
-        Key: "project.json",
-        Bucket: "eunko.workroom",
-      });
-
-      alert("업로드 완료");
-    } catch (err) {
-      console.error(err);
-    }
-  }, [category, contents, images, menu, subMenuId, subMenuName, uploadFile]);
-
+    imageInputRef,
+  } = hookProps;
+  const {
+    handleChangeMenu,
+    handleChangeCategory,
+    handleChangeSubMenuName,
+    handleChangeSubMenuId,
+    handleChangeImageId,
+    handleChangeImageTitle,
+    handleChangeImageSubTitle,
+    handleChangeImageDate,
+    handleChangeImageSize,
+    handleChangeImageFeature,
+    handleChangeImage,
+    handleAddImage,
+    handleDoneButtonClick,
+  } = hookHandlers;
   return (
     <>
       <Section>
