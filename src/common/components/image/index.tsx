@@ -3,6 +3,8 @@ import {
   Wrapper,
   Image,
   Content,
+  LeftButtonWrapper,
+  RightButtonWrapper,
   LeftButton,
   RightButton,
   Title,
@@ -37,10 +39,14 @@ const ImageController: React.FC<IProps> = ({ menu }) => {
       <Image src={selectedImage.src} alt={selectedImage.title} />
       <Content>
         {!hidePrevButton && (
-          <LeftButton onClick={handlePrevButtonClick}></LeftButton>
+          <LeftButtonWrapper onClick={handlePrevButtonClick}>
+            <LeftButton />
+          </LeftButtonWrapper>
         )}
         {!hideNextButton && (
-          <RightButton onClick={handleNextButtonClick}></RightButton>
+          <RightButtonWrapper onClick={handleNextButtonClick}>
+            <RightButton />
+          </RightButtonWrapper>
         )}
         <Title>{decodeURIComponent(selectedImage.title)}</Title>
         {selectedImage.type === "image" && (

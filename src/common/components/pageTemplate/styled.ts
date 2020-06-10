@@ -17,15 +17,17 @@ export const Main = styled.div`
   flex: 1;
 `;
 
-export const BackButton = styled.div`
+export const BackButton = styled.img.attrs({
+  src:
+    "https://s3.ap-northeast-2.amazonaws.com/eunko.workroom/next_arrow_image.png",
+})`
   width: 24px;
-  height: 24px;
-  background-color: #c4c4c4;
   position: absolute;
-  top: 0;
-  left: 16px;
+  top: 8px;
+  left: 24px;
   z-index: 10;
 `;
+
 export const ImageWrapper = styled.div`
   width: 100%;
   height: 100%;
