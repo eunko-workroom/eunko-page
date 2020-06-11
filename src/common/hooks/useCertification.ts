@@ -1,8 +1,8 @@
 import React from "react";
-import { PASSWORD } from "../../../common/constants/admin";
 import { useHistory } from "react-router";
+import { PASSWORD } from "../constants/admin";
 
-export default function useEffects() {
+export default function useCertification() {
   const history = useHistory();
   React.useEffect(() => {
     const password = prompt(

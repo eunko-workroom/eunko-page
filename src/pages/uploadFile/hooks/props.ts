@@ -1,6 +1,7 @@
 import React from "react";
 
 import { useUploadToS3 } from "../../../common/hooks/useS3";
+import useCertification from "../../../common/hooks/useCertification";
 
 export default function useProps({
   contents,
@@ -8,6 +9,7 @@ export default function useProps({
   contents: Common.TabContent;
 }) {
   const uploadFile = useUploadToS3();
+  useCertification();
   const [menu, setMenu] = React.useState<string>("Photography");
 
   const selectedMenuData = React.useMemo(

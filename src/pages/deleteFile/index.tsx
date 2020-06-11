@@ -1,9 +1,11 @@
 import React from "react";
 
 import { Section, Text, Input, Left, Right } from "./styled";
+
 import { useUploadToS3, useDeleteS3File } from "../../common/hooks/useS3";
-import { bucketName, bucketUrl } from "../../common/constants/s3";
 import { safeStringifyJSON } from "../../common/components/helpers/safeJSON";
+import useCertification from "../../common/hooks/useCertification";
+import { bucketName, bucketUrl } from "../../common/constants/s3";
 
 export default function DeleteFile({
   contents,
@@ -21,6 +23,7 @@ export default function DeleteFile({
   );
 
   const [selectedId, setSelectedMenuId] = React.useState<string>("");
+
   const handleChangeSelectedId = React.useCallback(
     (e: React.ChangeEvent<HTMLSelectElement>) => {
       setSelectedMenuId(e.target.value);
@@ -79,6 +82,8 @@ export default function DeleteFile({
       }
     }
   }, [contents, deleteFile, menu, selectedId, selectedMenuData, uploadFile]);
+
+  useCertification();
 
   return (
     <>
