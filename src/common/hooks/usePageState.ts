@@ -78,10 +78,8 @@ export function useSelectedImageState({
     }
     if (hideNextButton) {
       selectNextMenu?.();
-    }
-
-    if (selectedImageIndex >= 0) {
-      const nextImage = selectedMenu?.images[selectedImageIndex + 1];
+    } else {
+      const nextImage = selectedMenu.images[selectedImageIndex + 1];
       setSelectedImageId(nextImage.id);
     }
   }, [
@@ -97,9 +95,8 @@ export function useSelectedImageState({
     }
     if (hidePrevButton) {
       selectPrevMenu?.();
-    }
-    if (selectedImageIndex >= 0) {
-      const prevImage = selectedMenu?.images[selectedImageIndex - 1];
+    } else {
+      const prevImage = selectedMenu.images[selectedImageIndex - 1];
       setSelectedImageId(prevImage.id);
     }
   }, [
