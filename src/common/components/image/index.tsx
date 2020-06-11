@@ -20,6 +20,7 @@ import { useSelectedImageState } from "../../hooks/usePageState";
 
 interface IProps {
   selectedMenu: Common.ISubMenu;
+  startLastIndex: boolean;
   selectNextMenu?(): void;
   selectPrevMenu?(): void;
 }

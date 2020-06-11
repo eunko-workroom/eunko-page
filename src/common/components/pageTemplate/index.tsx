@@ -5,6 +5,7 @@ import useIsMobile from "../../hooks/useIsMobile";
 
 interface IProps {
   menu?: Common.ISubMenu[];
+  startLastIndex?: boolean;
   visibleBackButton?: boolean;
   selectNextMenu?(): void;
   selectPrevMenu?(): void;
@@ -12,6 +13,7 @@ interface IProps {
 }
 const PageTemplate: React.FC<React.PropsWithChildren<IProps>> = ({
   menu,
+  startLastIndex = false,
   visibleBackButton = true,
   handleBackButtonClick,
   selectNextMenu,
@@ -33,6 +35,7 @@ const PageTemplate: React.FC<React.PropsWithChildren<IProps>> = ({
             <Image
               key={menu.id}
               selectedMenu={menu}
+              startLastIndex={startLastIndex}
               selectNextMenu={selectNextMenu}
               selectPrevMenu={selectPrevMenu}
             />

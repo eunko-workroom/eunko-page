@@ -14,10 +14,16 @@ export default function Photography({ menu }: { menu: Common.ISubMenu[] }) {
     selectedMenuId,
     setSelectedMenuId,
     handleBackButtonClick,
+    selectNextMenu,
+    selectPrevMenu,
+    startLastIndex,
   } = useSelectedMenuState(menu);
   return (
     <PageTemplate
       menu={selectedMenu !== undefined ? [selectedMenu] : undefined}
+      startLastIndex={startLastIndex}
+      selectNextMenu={selectNextMenu}
+      selectPrevMenu={selectPrevMenu}
       handleBackButtonClick={handleBackButtonClick}
     >
       <SubMenu>

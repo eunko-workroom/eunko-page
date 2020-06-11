@@ -2,6 +2,7 @@ import React from "react";
 
 export function useSelectedMenuState(menu: Common.ISubMenu[]) {
   const [selectedMenuId, setSelectedMenuId] = React.useState<string>("");
+  const [startLastIndex, setStartLastIndex] = React.useState(false);
 
   const sortByCategory = menu.reduce((result, current) => {
     const sameCategory = result.find(
@@ -35,8 +36,13 @@ export function useSelectedMenuState(menu: Common.ISubMenu[]) {
   const selectPrevMenu = React.useCallback(() => {
     if (menu[selectedMenuIndex - 1]) {
       setSelectedMenuId(menu[selectedMenuIndex - 1].id);
+      setStartLastIndex(true);
     }
   }, [menu, selectedMenuIndex]);
+
+  React.useEffect(() => {
+    setStartLastIndex(false);
+  }, [selectedMenuId]);
 
   return {
     selectedMenuId,
@@ -46,20 +52,26 @@ export function useSelectedMenuState(menu: Common.ISubMenu[]) {
     handleBackButtonClick,
     selectNextMenu,
     selectPrevMenu,
+    startLastIndex,
   };
 }
 
 export function useSelectedImageState({
   selectedMenu,
+  startLastIndex,
   selectNextMenu,
   selectPrevMenu,
 }: {
   selectedMenu: Common.ISubMenu;
+  startLastIndex: boolean;
   selectNextMenu?(): void;
   selectPrevMenu?(): void;
 }) {
+  const defaultSelectedImage = startLastIndex
+    ? selectedMenu.images[selectedMenu.images.length - 1].id
+    : selectedMenu.images[0].id;
   const [selectedImageId, setSelectedImageId] = React.useState<string>(
-    selectedMenu.images[0] ? selectedMenu.images[0].id : ""
+    defaultSelectedImage
   );
   const selectedImageIndex = React.useMemo(
     () =>
