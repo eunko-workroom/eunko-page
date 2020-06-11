@@ -60,27 +60,34 @@ export default function useHandlers(props: IHookProps) {
   const handleChangeSubMenuId = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const id = e.target.value;
-
-      if (selectedMenuData.findIndex((target) => target.id === id) !== -1) {
+      if (
+        selectedMenuData.findIndex(
+          (target) => target.id === `${menu}_${id}`
+        ) !== -1
+      ) {
         alert("이미 있는 아이디에요 !");
       } else {
         setSubMenuId(id);
       }
     },
-    [selectedMenuData, setSubMenuId]
+    [menu, selectedMenuData, setSubMenuId]
   );
 
   const handleChangeImageId = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       const id = e.target.value;
 
-      if (images.findIndex((target) => target.id === id) !== -1) {
+      if (
+        images.findIndex(
+          (target) => target.id === `${menu}_${subMenuId}_${id}`
+        ) !== -1
+      ) {
         alert("이미 있는 아이디에요 !");
       } else {
         setImageId(id);
       }
     },
-    [images, setImageId]
+    [images, menu, setImageId, subMenuId]
   );
 
   const handleChangeImageTitle = React.useCallback(
@@ -133,7 +140,7 @@ export default function useHandlers(props: IHookProps) {
 
       const uploadedImage = await uploadFile({
         Body: image,
-        Key: `${imageId}.${image.type.split("/")[1]}`,
+        Key: `${menu}_${subMenuId}_${imageId}.${image.type.split("/")[1]}`,
         ContentType: image.type,
         Bucket: "eunko.workroom",
         ContentEncoding: "utf-8",
@@ -142,7 +149,7 @@ export default function useHandlers(props: IHookProps) {
         ...images,
         {
           type: "image",
-          id: imageId,
+          id: `${menu}_${subMenuId}_${imageId}`,
 
           src: `${bucketUrl}${uploadedImage.Key}`,
           title: encodeURIComponent(imageTitle),
@@ -176,6 +183,7 @@ export default function useHandlers(props: IHookProps) {
     imageSubTitle,
     imageTitle,
     images,
+    menu,
     setImageDate,
     setImageFeature,
     setImageId,
@@ -183,6 +191,7 @@ export default function useHandlers(props: IHookProps) {
     setImageSubTitle,
     setImageTitle,
     setImages,
+    subMenuId,
     uploadFile,
   ]);
 
@@ -196,7 +205,7 @@ export default function useHandlers(props: IHookProps) {
       [menu]: [
         ...contents[menu as Common.MenuType],
         {
-          id: subMenuId,
+          id: `${menu}_${subMenuId}`,
           category: encodeURIComponent(category),
           menuTitle: encodeURIComponent(subMenuName),
           images: images,
