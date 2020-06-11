@@ -13,5 +13,5 @@ export default function useEffects() {
       alert("비밀번호가 다릅니다");
       history.push("/");
     }
-  }, []);
+  }, [history]);
 }

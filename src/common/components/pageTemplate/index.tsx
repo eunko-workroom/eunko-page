@@ -31,6 +31,7 @@ const PageTemplate: React.FC<React.PropsWithChildren<IProps>> = ({
         <ImageWrapper>
           {(menu || []).map((menu) => (
             <Image
+              key={menu.id}
               selectedMenu={menu}
               selectNextMenu={selectNextMenu}
               selectPrevMenu={selectPrevMenu}

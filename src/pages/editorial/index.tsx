@@ -25,12 +25,13 @@ export default function Editorial({ menu }: { menu: Common.ISubMenu[] }) {
     >
       <SubMenu>
         {sortByCategory.map((category) => (
-          <Category>
-            {category.menus.map((image) => (
+          <Category key={category.category}>
+            {category.menus.map((menu) => (
               <SubMenuItem
-                title={image.menuTitle}
-                id={image.id}
-                selected={image.id === selectedMenu?.id}
+                key={menu.id}
+                title={menu.menuTitle}
+                id={menu.id}
+                selected={menu.id === selectedMenu?.id}
                 handleClick={setSelectedMenuId}
               />
             ))}

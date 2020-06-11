@@ -22,9 +22,10 @@ export default function Photography({ menu }: { menu: Common.ISubMenu[] }) {
     >
       <SubMenu>
         {sortByCategory.map((category) => (
-          <Category>
+          <Category key={category.category}>
             {category.menus.map((menu) => (
               <SubMenuItem
+                key={menu.id}
                 title={decodeURIComponent(menu.menuTitle)}
                 id={menu.id}
                 selected={menu.id === selectedMenuId}
