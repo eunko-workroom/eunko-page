@@ -15,7 +15,7 @@ function RootComponent() {
   const contents = useGetAlbumsFromS3();
   return (
     <BrowserRouter>
-      <Helmet title="Eunko Workroom" />
+      <Helmet title="Eunko" />
       <GlobalStyle />
       <GlobalAppBar>
         <Switch>
