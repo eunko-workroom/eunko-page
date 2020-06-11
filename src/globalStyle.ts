@@ -1,8 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-  @import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css'); 
-  
   html {
     -webkit-overflow-scrolling: touch;
     font-size: 10px;
