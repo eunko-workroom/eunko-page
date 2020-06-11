@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import GlobalStyle from "./globalStyle";
 import GlobalAppBar from "./common/components/globalHeader";
@@ -14,7 +14,7 @@ import { useGetAlbumsFromS3 } from "./common/hooks/useS3";
 function RootComponent() {
   const contents = useGetAlbumsFromS3();
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Helmet title="Eunko" />
       <GlobalStyle />
       <GlobalAppBar>
@@ -36,7 +36,7 @@ function RootComponent() {
           </Route>
         </Switch>
       </GlobalAppBar>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
