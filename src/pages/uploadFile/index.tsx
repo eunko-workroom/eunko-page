@@ -2,7 +2,7 @@ import React from "react";
 
 import { Section, Text, Input, Left, Right } from "./styled";
 
-import { useProps, useHandlers, useEffects } from "./hooks";
+import { useProps, useHandlers } from "./hooks";
 
 export default function UploadFile(props: { contents: Common.TabContent }) {
   const hookProps = useProps(props);
@@ -36,7 +36,6 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
     handleAddImage,
     handleDoneButtonClick,
   } = hookHandlers;
-  useEffects();
 
   return (
     <>
