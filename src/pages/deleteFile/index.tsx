@@ -62,9 +62,9 @@ export default function DeleteFile({
 
         const uploadBody = {
           ...contents,
-          [menu as Common.MenuType]: [
-            selectedMenuData.filter((subMenu) => subMenu.id !== selectedId),
-          ],
+          [menu as Common.MenuType]: selectedMenuData.filter(
+            (subMenu) => subMenu.id !== selectedId
+          ),
         };
         const stringData = safeStringifyJSON(uploadBody);
 
