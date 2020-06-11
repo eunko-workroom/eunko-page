@@ -6,12 +6,16 @@ import useIsMobile from "../../hooks/useIsMobile";
 interface IProps {
   menu?: Common.ISubMenu[];
   visibleBackButton?: boolean;
+  selectNextMenu?(): void;
+  selectPrevMenu?(): void;
   handleBackButtonClick?(): void;
 }
 const PageTemplate: React.FC<React.PropsWithChildren<IProps>> = ({
   menu,
   visibleBackButton = true,
   handleBackButtonClick,
+  selectNextMenu,
+  selectPrevMenu,
   children,
 }) => {
   const isMobile = useIsMobile();
@@ -26,7 +30,11 @@ const PageTemplate: React.FC<React.PropsWithChildren<IProps>> = ({
       {isMainImagePanel && (
         <ImageWrapper>
           {(menu || []).map((menu) => (
-            <Image menu={menu} />
+            <Image
+              selectedMenu={menu}
+              selectNextMenu={selectNextMenu}
+              selectPrevMenu={selectPrevMenu}
+            />
           ))}
         </ImageWrapper>
       )}

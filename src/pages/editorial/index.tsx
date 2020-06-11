@@ -13,10 +13,14 @@ export default function Editorial({ menu }: { menu: Common.ISubMenu[] }) {
     selectedMenu,
     setSelectedMenuId,
     handleBackButtonClick,
+    selectNextMenu,
+    selectPrevMenu,
   } = useSelectedMenuState(menu);
   return (
     <PageTemplate
       menu={selectedMenu !== undefined ? [selectedMenu] : undefined}
+      selectNextMenu={selectNextMenu}
+      selectPrevMenu={selectPrevMenu}
       handleBackButtonClick={handleBackButtonClick}
     >
       <SubMenu>

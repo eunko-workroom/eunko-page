@@ -19,17 +19,17 @@ import {
 import { useSelectedImageState } from "../../hooks/usePageState";
 
 interface IProps {
-  menu: Common.ISubMenu;
+  selectedMenu: Common.ISubMenu;
+  selectNextMenu?(): void;
+  selectPrevMenu?(): void;
 }
 
-const ImageController: React.FC<IProps> = ({ menu }) => {
+const ImageController: React.FC<IProps> = (props) => {
   const {
     handlePrevButtonClick,
     handleNextButtonClick,
-    hideNextButton,
-    hidePrevButton,
     selectedImage,
-  } = useSelectedImageState(menu);
+  } = useSelectedImageState(props);
   if (!selectedImage) {
     return null;
   }
@@ -38,16 +38,12 @@ const ImageController: React.FC<IProps> = ({ menu }) => {
     <Wrapper>
       <Image src={selectedImage.src} alt={selectedImage.title} />
       <Content>
-        {!hidePrevButton && (
-          <LeftButtonWrapper onClick={handlePrevButtonClick}>
-            <LeftButton />
-          </LeftButtonWrapper>
-        )}
-        {!hideNextButton && (
-          <RightButtonWrapper onClick={handleNextButtonClick}>
-            <RightButton />
-          </RightButtonWrapper>
-        )}
+        <LeftButtonWrapper onClick={handlePrevButtonClick}>
+          <LeftButton />
+        </LeftButtonWrapper>
+        <RightButtonWrapper onClick={handleNextButtonClick}>
+          <RightButton />
+        </RightButtonWrapper>
         <Title>{decodeURIComponent(selectedImage.title)}</Title>
         {selectedImage.type === "image" && (
           <>

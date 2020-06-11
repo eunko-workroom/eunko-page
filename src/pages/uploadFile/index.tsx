@@ -36,6 +36,8 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
     handleAddImage,
     handleDoneButtonClick,
   } = hookHandlers;
+  useEffects();
+
   return (
     <>
       <Section>

@@ -79,3 +79,19 @@ export function useUploadToS3() {
       .promise();
   }, []);
 }
+
+export function useDeleteS3File() {
+  return useCallback((p: S3.Types.DeleteObjectRequest) => {
+    const s3 = new AWS.S3({
+      apiVersion,
+      params: {
+        Bucket: bucketName,
+      },
+      accessKeyId,
+      secretAccessKey,
+      region: bucketRegion,
+    });
+
+    return s3.deleteObject({ Bucket: bucketName, ...p }).promise();
+  }, []);
+}
