@@ -4,8 +4,14 @@ import { Section, Text, Input, Left, Right } from "./styled";
 
 import useCertification from "../../common/hooks/useCertification";
 import { useUploadToS3 } from "../../common/hooks/useS3";
+import { safeStringifyJSON } from "../../common/components/helpers/safeJSON";
+import { bucketUrl } from "../../common/constants/s3";
 
-export default function UploadMainImage() {
+export default function UploadMainImage({
+  contents,
+}: {
+  contents: Common.TabContent;
+}) {
   useCertification();
   const uploadFile = useUploadToS3();
 
@@ -23,11 +29,25 @@ export default function UploadMainImage() {
       if (!image) {
         return;
       }
-      await uploadFile({
+      const uploadedImage = await uploadFile({
         Body: image,
         Key: `main.${image.type.split("/")[1]}`,
         ContentType: image.type,
         Bucket: "eunko.workroom",
+        ContentEncoding: "utf-8",
+      });
+
+      const uploadBody = {
+        ...contents,
+        Main: `${bucketUrl}${uploadedImage.Key}`,
+      };
+      const stringData = safeStringifyJSON(uploadBody);
+
+      await uploadFile({
+        Body: new Blob([stringData], { type: "application/json" }),
+        Key: "project.json",
+        Bucket: "eunko.workroom",
+        ContentType: "application/json; charset=UTF-8",
         ContentEncoding: "utf-8",
       });
 

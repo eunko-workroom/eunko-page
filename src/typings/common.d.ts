@@ -19,7 +19,7 @@ declare namespace Common {
     images: Image[];
   }
 
-  type TabContent = Record<MenuType, ISubMenu[]> & { Main: string };
+  type TabContent = Record<MenuType, ISubMenu[]> & { Main?: string };
 
   interface ISortByCategory {
     category: string;
