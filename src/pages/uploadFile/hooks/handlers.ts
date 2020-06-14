@@ -148,15 +148,15 @@ export default function useHandlers(props: IHookProps) {
       setImages([
         ...images,
         {
-          type: "image",
           id: `${menu}_${subMenuId}_${imageId}`,
-
           src: `${bucketUrl}${uploadedImage.Key}`,
           title: encodeURIComponent(imageTitle),
-          subTitle: encodeURIComponent(imageSubTitle),
-          date: encodeURIComponent(imageDate),
-          size: encodeURIComponent(imageSize),
-          feature: encodeURIComponent(imageFeature),
+          subTitle: imageSubTitle
+            ? encodeURIComponent(imageSubTitle)
+            : undefined,
+          date: imageDate ? encodeURIComponent(imageDate) : undefined,
+          size: imageSize ? encodeURIComponent(imageSize) : undefined,
+          feature: imageFeature ? encodeURIComponent(imageFeature) : undefined,
         },
       ]);
       alert("업로드 완료");

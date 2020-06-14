@@ -49,6 +49,7 @@ export const RightButtonWrapper = styled.div`
 
 export const Title = styled.h1`
   margin-bottom: 16px;
+  font-size: 17px;
 `;
 
 export const ImageInfo = styled.div`

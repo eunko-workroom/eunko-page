@@ -1,24 +1,15 @@
 declare namespace Common {
-  type Image = IImageWithDescription | IOnlyImage;
+  type Image = IImageWithDescription;
   type MenuType = "Photography" | "Editorial" | "More";
 
-  interface IOnlyImage {
-    type: "nonDescriptionImage";
-    id: string;
-    title: string;
-
-    src: string;
-  }
-
   interface IImageWithDescription {
-    type: "image";
     id: string;
     src: string;
     title: string;
-    subTitle: string;
-    date: string;
-    size: string;
-    feature: string;
+    subTitle?: string;
+    date?: string;
+    size?: string;
+    feature?: string;
   }
 
   interface ISubMenu {
@@ -28,7 +19,7 @@ declare namespace Common {
     images: Image[];
   }
 
-  type TabContent = Record<MenuType, ISubMenu[]>;
+  type TabContent = Record<MenuType, ISubMenu[]> & { Main: string };
 
   interface ISortByCategory {
     category: string;

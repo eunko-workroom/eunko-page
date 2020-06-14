@@ -27,6 +27,7 @@ function convertUint8Array(arr: Uint8Array) {
 
 export function useGetAlbumsFromS3() {
   const [albums, setAlbums] = useState<Common.TabContent>({
+    Main: "",
     Photography: [],
     Editorial: [],
     More: [],

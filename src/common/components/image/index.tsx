@@ -46,23 +46,27 @@ const ImageController: React.FC<IProps> = (props) => {
           <RightButton />
         </RightButtonWrapper>
         <Title>{decodeURIComponent(selectedImage.title)}</Title>
-        {selectedImage.type === "image" && (
-          <>
-            <SubTitle>{decodeURIComponent(selectedImage.subTitle)}</SubTitle>
-            <ImageInfo>
-              <Left>
-                <Date>Date</Date>
-                <Size>Size</Size>
-                <Feature>Feature</Feature>
-              </Left>
-              <Right>
-                <Date>{decodeURIComponent(selectedImage.date)}</Date>
-                <Size>{decodeURIComponent(selectedImage.size)}</Size>
-                <Feature>{decodeURIComponent(selectedImage.feature)}</Feature>
-              </Right>
-            </ImageInfo>
-          </>
+        {selectedImage.subTitle && (
+          <SubTitle>{decodeURIComponent(selectedImage.subTitle)}</SubTitle>
         )}
+        <ImageInfo>
+          <Left>
+            {selectedImage.date && <Date>Date</Date>}
+            {selectedImage.size && <Size>Size</Size>}
+            {selectedImage.feature && <Feature>Feature</Feature>}
+          </Left>
+          <Right>
+            {selectedImage.date && (
+              <Date>{decodeURIComponent(selectedImage.date)}</Date>
+            )}
+            {selectedImage.size && (
+              <Size>{decodeURIComponent(selectedImage.size)}</Size>
+            )}
+            {selectedImage.feature && (
+              <Feature>{decodeURIComponent(selectedImage.feature)}</Feature>
+            )}
+          </Right>
+        </ImageInfo>
       </Content>
     </Wrapper>
   );

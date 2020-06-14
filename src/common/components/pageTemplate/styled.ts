@@ -32,7 +32,7 @@ export const ImageWrapper = styled.div`
   width: 100%;
   height: 100%;
   @media ${MEDIA_QUERY.DESKTOP} {
-    width: 500px;
+    width: 600px;
     padding-right: 100px;
   }
 `;

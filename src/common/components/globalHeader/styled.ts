@@ -22,10 +22,9 @@ export const Main = styled.div<{ margin?: number }>`
     `}
 `;
 
-export const Logo = styled.h1`
-  font-weight: normal;
+export const Logo = styled.h1`s
   font-size: 17px;
-  margin-right: 16px;
+  margin-right: 12px;
 `;
 
 export const MenuItem = styled.span<{ selected?: boolean }>`

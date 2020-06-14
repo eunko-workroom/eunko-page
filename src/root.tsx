@@ -10,6 +10,7 @@ import Editorial from "./pages/editorial";
 import More from "./pages/more";
 import UploadFile from "./pages/uploadFile";
 import DeleteFile from "./pages/deleteFile";
+import UploadMainImage from "./pages/uploadMainImage";
 import { useGetAlbumsFromS3 } from "./common/hooks/useS3";
 
 function RootComponent() {
@@ -31,6 +32,9 @@ function RootComponent() {
           </Route>
           <Route path="/upload/file">
             <UploadFile contents={contents} />
+          </Route>
+          <Route path="/upload/main">
+            <UploadMainImage />
           </Route>
           <Route path="/delete/file">
             <DeleteFile contents={contents} />

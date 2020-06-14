@@ -34,7 +34,7 @@ const GlobalAppBar: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
           </MenuItem>
           <MenuItem selected={menu === "editorial"}>
             <Link ref={editorialRef} to="/editorial">
-              Editorial
+              Editorial Header
             </Link>
           </MenuItem>
           <MenuItem selected={menu === "more"}>
