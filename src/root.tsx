@@ -40,7 +40,7 @@ function RootComponent() {
             <DeleteFile contents={contents} />
           </Route>
           <Route path="/">
-            <Main images={[]} />
+            <Main main={contents.Main} />
           </Route>
         </Switch>
       </GlobalAppBar>

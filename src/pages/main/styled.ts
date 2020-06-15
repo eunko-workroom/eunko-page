@@ -27,13 +27,11 @@ export const MainWrapper = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
-  width: 600px;
+  width: 550px;
   padding-right: 100px;
 `;
 
-export const Image = styled.img.attrs({
-  src: "https://s3.ap-northeast-2.amazonaws.com/eunko.workroom/main.png",
-})`
+export const Image = styled.img`
   object-fit: cover;
   width: 100%;
 `;

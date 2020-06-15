@@ -9,7 +9,7 @@ import {
 } from "./styled";
 import useIsMobile from "../../common/hooks/useIsMobile";
 
-export default function Main({ images }: { images: Common.Image[][] }) {
+export default function Main({ main }: { main?: string }) {
   const isMobile = useIsMobile();
   return (
     <Wrapper>
@@ -22,9 +22,9 @@ export default function Main({ images }: { images: Common.Image[][] }) {
           <Text>instagram @eunko_</Text>
         </a>
       </MainWrapper>
-      {isMobile && (
+      {!isMobile && (
         <ImageWrapper>
-          <Image alt="main" />
+          <Image alt="main" src={main} />
         </ImageWrapper>
       )}
     </Wrapper>

@@ -59,7 +59,7 @@ export default function UploadMainImage({
     } catch (err) {
       console.error(err);
     }
-  }, []);
+  }, [contents, image, uploadFile]);
   return (
     <>
       <Section>
