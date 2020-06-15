@@ -34,7 +34,7 @@ function RootComponent() {
             <UploadFile contents={contents} />
           </Route>
           <Route path="/upload/main">
-            <UploadMainImage />
+            <UploadMainImage contents={contents} />
           </Route>
           <Route path="/delete/file">
             <DeleteFile contents={contents} />
