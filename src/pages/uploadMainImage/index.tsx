@@ -51,7 +51,7 @@ export default function UploadMainImage({
         ContentEncoding: "utf-8",
       });
 
-      alert("업로드 완료");
+      alert("메인 이미지 업로드 완료");
 
       if (imageInputRef.current) {
         imageInputRef.current.value = "";

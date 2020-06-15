@@ -159,7 +159,7 @@ export default function useHandlers(props: IHookProps) {
           feature: imageFeature ? encodeURIComponent(imageFeature) : undefined,
         },
       ]);
-      alert("업로드 완료");
+      alert("이미지 업로드 완료");
 
       setImageId("");
       setImageTitle("");
@@ -223,7 +223,7 @@ export default function useHandlers(props: IHookProps) {
         ContentEncoding: "utf-8",
       });
 
-      alert("업로드 완료");
+      alert("서브메뉴 업로드 완료");
     } catch (err) {
       console.error(err);
     }

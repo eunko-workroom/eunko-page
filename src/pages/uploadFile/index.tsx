@@ -41,16 +41,22 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
     <>
       <Section>
         <Text>
-          여기서 서브메뉴를 생성할 수 있습니다 <br /> 각각의 인풋에 해당하는
-          값을 넣어주신후 맨 마지막에 서브메뉴 생성하기 버튼을 누르면 서브메뉴가
-          생성됩니다.
+          Sub Menu 추가
           <br />
-          그리고 서브메뉴에 들어가는 각각의 이미지는 아래의 이미지 추가 버튼을
-          통해서 추가할 수 있습니다. 이미지 값을 다 채우신 뒤에 추가 버튼을
-          누르면 만들려고 하는 서브메뉴에 이미지가 추가가 됩니다. 필요하신 만큼
-          추가하시면 됩니다.
-          <br /> (이미지를 추가하시고 마지막에 서브메뉴 생성하기 버튼을
-          누르셔야됩니다.)
+          <br />
+          <h3>하나의 서브메뉴 생성 흐름</h3>
+          <br />
+          1. 서브메뉴를 정의하는 값을 입력한다.
+          <br />
+          2. 이미지를 정의하는 값을 입력한다.
+          <br />
+          3. "이미지 추가" 버튼을 클릭한 후 "이미지 업로드 완료" 알림을 확인한다.
+          <br />
+          4. 추가하고자 하는 이미지 만큼 2 ~ 3 번을 반복한다.
+          <br />
+          5. "서브메뉴 생성" 버튼을 클릭한 후 "서브메뉴 업로드 완료" 알림을 확인한다.
+          <br />
+          6. 페이지 새로고침을 해준다. (중요)
         </Text>
       </Section>
       <Section>
@@ -129,7 +135,7 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
           <Text>사이즈</Text>
           <Text>피쳐</Text>
           <Text>이미지</Text>
-          <button onClick={handleAddImage}>추가하기</button>
+          <button onClick={handleAddImage}>이미지 추가</button>
         </Left>
         <Right>
           <Input
@@ -175,7 +181,7 @@ export default function UploadFile(props: { contents: Common.TabContent }) {
       </Section>
       <hr />
       <Section>
-        <button onClick={handleDoneButtonClick}>서브메뉴 생성하기</button>
+        <button onClick={handleDoneButtonClick}>서브메뉴 생성</button>
       </Section>
     </>
   );
