@@ -31,7 +31,7 @@ export default function Editorial({ menu }: { menu: Common.ISubMenu[] }) {
             {category.menus.map((menu) => (
               <SubMenuItem
                 key={menu.id}
-                title={menu.menuTitle}
+                title={decodeURIComponent(menu.menuTitle)}
                 id={menu.id}
                 selected={menu.id === selectedMenu?.id}
                 handleClick={setSelectedMenuId}
