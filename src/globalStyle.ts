@@ -12,12 +12,12 @@ export default createGlobalStyle`
     -webkit-text-size-adjust: 100%;
   }
   body {
+    
     margin: 0;
     -webkit-overflow-scrolling: touch;
-    font-family: "Noto Sans KR", sans-serif;
-    font-weight: 300;
+    /* font-family: "Noto Sans KR", sans-serif; */
+    font-weight: 350;
     font-style: normal;
-    letter-spacing: 0.65px;
     line-height: 1.35;
   }
   html,
@@ -28,7 +28,7 @@ export default createGlobalStyle`
   }
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    font-weight: 300;
+    font-weight: 350;
     letter-spacing: 0.65px;
     line-height: 1.35;
   }

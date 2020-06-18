@@ -5,7 +5,7 @@ export const SIZE = {
 };
 
 export const MEDIA_QUERY = {
-  EXCEPT_DESKTOP: `(min-width: ${SIZE.MOBILE}) and (max-width: ${SIZE.DESKTOP})`,
+  EXCEPT_DESKTOP: `(min-width: ${SIZE.MOBILE}) and (max-width: ${SIZE.TABLET})`,
   EXCEPT_MOBILE: `(min-width: ${SIZE.TABLET})`,
   ONLY_MOBILE: `(min-width: 0) and (max-width: ${SIZE.TABLET})`,
   TABLET: `(min-width: ${SIZE.TABLET})`,

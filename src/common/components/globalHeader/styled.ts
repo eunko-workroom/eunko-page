@@ -7,7 +7,9 @@ export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
 `;
+
 export const Header = styled.header`
+  margin-bottom: 4px;
   padding: 16px;
   display: flex;
 `;
@@ -22,7 +24,7 @@ export const Main = styled.div<{ margin?: number }>`
     `}
 `;
 
-export const Logo = styled.h1`s
+export const Logo = styled.h1`
   font-size: 17px;
   margin-right: 12px;
 `;

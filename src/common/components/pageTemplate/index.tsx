@@ -23,12 +23,11 @@ const PageTemplate: React.FC<React.PropsWithChildren<IProps>> = ({
   const isMobile = useIsMobile();
   const isShowBackButton =
     isMobile && Boolean(menu?.length) && visibleBackButton;
-  const isMainPanel = !isMobile || !menu?.length;
   const isMainImagePanel = Boolean(menu?.length);
   return (
     <Wrapper>
       {isShowBackButton && <BackButton onClick={handleBackButtonClick} />}
-      {isMainPanel && <Main>{children}</Main>}
+      {<Main>{!menu?.length && children}</Main>}
       {isMainImagePanel && (
         <ImageWrapper>
           {(menu || []).map((menu) => (
