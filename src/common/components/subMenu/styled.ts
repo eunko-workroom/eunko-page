@@ -14,6 +14,7 @@ export const SubMenuItemWrapper = styled.div<{ selected?: boolean }>`
 
   color: #c4c4c4;
   cursor: pointer;
+  margin-bottom: 2px;
 
   ${(props) =>
     props.selected &&

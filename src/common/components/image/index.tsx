@@ -5,8 +5,6 @@ import {
   Content,
   LeftButtonWrapper,
   RightButtonWrapper,
-  LeftButton,
-  RightButton,
   Title,
   SubTitle,
   Date,
@@ -40,10 +38,10 @@ const ImageController: React.FC<IProps> = (props) => {
       <Image src={selectedImage.src} alt={selectedImage.title} />
       <Content>
         <LeftButtonWrapper onClick={handlePrevButtonClick}>
-          <LeftButton />
+          {"<"}
         </LeftButtonWrapper>
         <RightButtonWrapper onClick={handleNextButtonClick}>
-          <RightButton />
+          {">"}
         </RightButtonWrapper>
         <Title>{decodeURIComponent(selectedImage.title)}</Title>
         {selectedImage.subTitle && (

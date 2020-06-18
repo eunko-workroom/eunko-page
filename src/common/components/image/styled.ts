@@ -10,21 +10,6 @@ export const Image = styled.img`
   width: 100%;
 `;
 
-export const LeftButton = styled(Image).attrs({
-  src:
-    "https://s3.ap-northeast-2.amazonaws.com/eunko.workroom/next_arrow_image.png",
-})`
-  height: 100%;
-`;
-
-export const RightButton = styled(Image).attrs({
-  src:
-    "https://s3.ap-northeast-2.amazonaws.com/eunko.workroom/next_arrow_image.png",
-})`
-  height: 100%;
-  transform: scaleX(-1);
-`;
-
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
@@ -33,18 +18,18 @@ export const Content = styled.div`
 `;
 
 export const LeftButtonWrapper = styled.div`
-  width: 16px;
-  height: 24px;
   position: absolute;
-  top: 0;
-  right: 32px;
+  top: -10px;
+  right: 36px;
+  font-size: 35px;
+  font-weight: 300;
 `;
 export const RightButtonWrapper = styled.div`
-  width: 16px;
-  height: 24px;
   position: absolute;
-  top: 0;
+  top: -10px;
   right: 0;
+  font-size: 35px;
+  font-weight: 300;
 `;
 
 export const Title = styled.h1`
