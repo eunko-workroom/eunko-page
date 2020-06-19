@@ -36,6 +36,10 @@ export const MenuItem = styled.span<{ selected?: boolean }>`
       color: black;
     `}
   cursor: pointer;
+
+  &:hover {
+    color: black;
+  }
 `;
 
 export const Nav = styled.nav`
