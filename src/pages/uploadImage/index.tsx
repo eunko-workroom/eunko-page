@@ -2,7 +2,7 @@ import React from "react";
 
 import { Section, Text, Input, Left, Right } from "./styled";
 
-import { useUploadToS3, useDeleteS3File } from "../../common/hooks/useS3";
+import { useUploadToS3 } from "../../common/hooks/useS3";
 import { safeStringifyJSON } from "../../common/components/helpers/safeJSON";
 import useCertification from "../../common/hooks/useCertification";
 import { bucketName, bucketUrl } from "../../common/constants/s3";
@@ -13,7 +13,7 @@ export default function DeleteFile({
   contents: Common.TabContent;
 }) {
   const uploadFile = useUploadToS3();
-  const deleteFile = useDeleteS3File();
+
   const [menu, setMenu] = React.useState<string>("Photography");
   const handleChangeMenu = React.useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -172,7 +172,20 @@ export default function DeleteFile({
     } catch (err) {
       console.error(err);
     }
-  }, [contents, deleteFile, menu, selectedId, selectedMenuData, uploadFile]);
+  }, [
+    contents,
+    image,
+    imageDate,
+    imageFeature,
+    imageId,
+    imageSize,
+    imageSubTitle,
+    imageTitle,
+    menu,
+    selectedId,
+    selectedMenuData,
+    uploadFile,
+  ]);
 
   useCertification();
 

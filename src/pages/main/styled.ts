@@ -1,5 +1,10 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { MEDIA_QUERY } from "../../common/constants/responsive";
+
+const FadeIn = keyframes`
+  0% {opacity:0;}
+  100% {opacity:1;}
+`;
 
 export const Text = styled.div`
   margin: 0 16px 0 0;
@@ -33,5 +38,10 @@ export const ImageWrapper = styled.div`
 
 export const Image = styled.img`
   object-fit: cover;
+
+  animation-name: ${FadeIn};
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
   width: 100%;
 `;

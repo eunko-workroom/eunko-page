@@ -13,10 +13,10 @@ export const Header = styled.header`
   padding: 16px;
   display: flex;
 `;
-export const Main = styled.div<{ margin?: number }>`
+export const Main = styled.div<{ margin: number }>`
   flex: 1;
+  margin-left: 16px;
   ${(props) =>
-    props.margin &&
     css`
       @media ${MEDIA_QUERY.DESKTOP} {
         margin-left: ${props.margin}px;

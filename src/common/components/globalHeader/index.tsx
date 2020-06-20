@@ -19,6 +19,7 @@ const GlobalAppBar: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         return moreRef.current?.offsetLeft;
     }
   }, [menu]);
+  console.log(mainPosition || 16);
 
   return (
     <Wrapper>

@@ -1,4 +1,9 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+const FadeIn = keyframes`
+  0% {opacity:0;}
+  100% {opacity:1;}
+`;
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -8,6 +13,11 @@ export const Wrapper = styled.div`
 export const Image = styled.img`
   object-fit: cover;
   width: 100%;
+  height: 100px;
+  animation-name: ${FadeIn};
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 `;
 
 export const Content = styled.div`
