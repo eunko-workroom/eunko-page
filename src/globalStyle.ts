@@ -18,6 +18,7 @@ export default createGlobalStyle`
     /* font-family: "Noto Sans KR", sans-serif; */
     font-weight: 350;
     font-style: normal;
+    letter-spacing: -0.1px;
     line-height: 1.35;
   }
   html,
@@ -25,12 +26,12 @@ export default createGlobalStyle`
   #root {
     width: 100%;
     height: 100%;
+   
   }
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
     font-weight: 350;
-    letter-spacing: 0.65px;
-    line-height: 1.35;
+    line-height: 1.35; 
   }
   li {
     list-style: none;
