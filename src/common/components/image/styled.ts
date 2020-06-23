@@ -13,7 +13,6 @@ export const Wrapper = styled.div`
 export const Image = styled.img`
   object-fit: cover;
   width: 100%;
-  height: 100px;
   animation-name: ${FadeIn};
   animation-duration: 3s;
   animation-iteration-count: 1;
