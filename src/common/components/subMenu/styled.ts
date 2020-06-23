@@ -21,4 +21,9 @@ export const SubMenuItemWrapper = styled.div<{ selected?: boolean }>`
     css`
       color: black;
     `}
+
+  &:hover {
+    color: black;
+  }
+  transition: color 0.2s linear;
 `;

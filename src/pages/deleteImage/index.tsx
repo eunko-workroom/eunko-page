@@ -164,16 +164,18 @@ export default function UploadFile({
           <select name="select-submenu-id" onChange={handleChangeSelectedId}>
             <option value="">선택해주세요</option>
             {selectedMenuData.map((subMenu) => (
-              <option
-                value={subMenu.id}
-              >{`${subMenu.menuTitle}(${subMenu.id})`}</option>
+              <option value={subMenu.id}>{`${decodeURIComponent(
+                subMenu.menuTitle
+              )}(${subMenu.id})`}</option>
             ))}
           </select>
 
           <select name="select-image-id" onChange={handleChangeSelectedImageId}>
             <option value="">선택해주세요</option>
             {selectedImageData.map((image) => (
-              <option value={image.id}>{`${image.title}(${image.id})`}</option>
+              <option value={image.id}>{`${decodeURIComponent(image.title)}(${
+                image.id
+              })`}</option>
             ))}
           </select>
         </Right>

@@ -44,10 +44,10 @@ function RootComponent() {
             <Route path="/delete/file">
               <DeleteFile contents={contents} />
             </Route>
-            <Route path="/upload/category/image">
+            <Route path="/upload/submenu/image">
               <UploadCategoryImage contents={contents} />
             </Route>
-            <Route path="/delete/category/image">
+            <Route path="/delete/submenu/image">
               <DeleteCategoryImage contents={contents} />
             </Route>
             <Route path="/">

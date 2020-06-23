@@ -40,6 +40,7 @@ export const MenuItem = styled.span<{ selected?: boolean }>`
   &:hover {
     color: black;
   }
+  transition: color 0.2s linear;
 `;
 
 export const Nav = styled.nav`

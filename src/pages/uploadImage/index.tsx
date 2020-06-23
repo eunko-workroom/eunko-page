@@ -168,7 +168,7 @@ export default function DeleteFile({
         ContentEncoding: "utf-8",
       });
 
-      alert("삭제완료");
+      alert("업로드 완료");
     } catch (err) {
       console.error(err);
     }
@@ -242,9 +242,9 @@ export default function DeleteFile({
           <select name="select-submenu-id" onChange={handleChangeSelectedId}>
             <option value="">선택해주세요</option>
             {selectedMenuData.map((subMenu) => (
-              <option
-                value={subMenu.id}
-              >{`${subMenu.menuTitle}(${subMenu.id})`}</option>
+              <option value={subMenu.id}>{`${decodeURIComponent(
+                subMenu.menuTitle
+              )}(${subMenu.id})`}</option>
             ))}
           </select>
         </Right>
@@ -304,7 +304,7 @@ export default function DeleteFile({
 
       <hr />
       <Section>
-        <button onClick={handleSubmit}>삭제</button>
+        <button onClick={handleSubmit}>업로드</button>
       </Section>
     </>
   );
