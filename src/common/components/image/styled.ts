@@ -24,6 +24,10 @@ export const Content = styled.div`
   flex-direction: column;
   position: relative;
   margin: 16px 0;
+  animation-name: ${FadeIn};
+  animation-duration: 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 `;
 
 export const LeftButtonWrapper = styled.div`
