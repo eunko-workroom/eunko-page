@@ -7,7 +7,7 @@ import {
   apiVersion,
   accessKeyId,
   secretAccessKey,
-} from "../constants/s3";
+} from "../constants/.s3";
 
 function convertUint8Array(arr: Uint8Array) {
   let str = "";

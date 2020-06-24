@@ -5,7 +5,7 @@ import { Section, Text, Input, Left, Right } from "./styled";
 import { useUploadToS3 } from "../../common/hooks/useS3";
 import { safeStringifyJSON } from "../../common/components/helpers/safeJSON";
 import useCertification from "../../common/hooks/useCertification";
-import { bucketName, bucketUrl } from "../../common/constants/s3";
+import { bucketName, bucketUrl } from "../../common/constants/.s3";
 
 export default function DeleteFile({
   contents,

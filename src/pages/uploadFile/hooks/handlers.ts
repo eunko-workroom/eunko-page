@@ -1,7 +1,7 @@
 import React from "react";
 
 import { safeStringifyJSON } from "../../../common/components/helpers/safeJSON";
-import { bucketUrl } from "../../../common/constants/s3";
+import { bucketUrl } from "../../../common/constants/.s3";
 import { IHookProps } from "./";
 
 export default function useHandlers(props: IHookProps) {
