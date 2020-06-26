@@ -1,6 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router";
-import { PASSWORD } from "../constants/admin";
+import { PASSWORD } from "../constants/.admin";
 
 export default function useCertification() {
   const history = useHistory();
