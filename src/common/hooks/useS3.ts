@@ -6,7 +6,7 @@ import {
   bucketRegion,
   apiVersion,
   accessKeyId,
-  secretAccessKey,
+  secretAccessKey
 } from "../constants/.s3";
 
 function convertUint8Array(arr: Uint8Array) {
