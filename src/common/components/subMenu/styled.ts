@@ -5,9 +5,7 @@ export const SubMenu = styled.div`
   flex-direction: column;
 `;
 
-export const Category = styled.div`
-  margin-bottom: 16px;
-`;
+export const Category = styled.div``;
 
 export const SubMenuItemWrapper = styled.div<{ selected?: boolean }>`
   font-size: 15px;
