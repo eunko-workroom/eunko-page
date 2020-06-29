@@ -15,9 +15,7 @@ export default createGlobalStyle`
     
     margin: 0;
     -webkit-overflow-scrolling: touch;
-    /* font-family: "Noto Sans KR", sans-serif; */
     font-weight: 350;
-    font-style: normal;
     letter-spacing: -0.1px;
     line-height: 1.35;
   }

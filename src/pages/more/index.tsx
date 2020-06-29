@@ -3,7 +3,7 @@ import PageTemplate from "../../common/components/pageTemplate";
 
 export default function More({ menu }: { menu: Common.ISubMenu[] }) {
   return (
-    <PageTemplate visibleBackButton={false} menu={menu}>
+    <PageTemplate visibleBackButton={false} menu={menu.reverse()}>
       <div />
     </PageTemplate>
   );

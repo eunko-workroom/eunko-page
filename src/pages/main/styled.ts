@@ -32,6 +32,7 @@ export const MainWrapper = styled.div`
 `;
 
 export const ImageWrapper = styled.div`
+  margin-top: 4px;
   width: 550px;
   padding-right: 100px;
 `;
