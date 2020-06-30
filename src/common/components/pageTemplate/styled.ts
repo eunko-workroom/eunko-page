@@ -31,8 +31,11 @@ export const BackButton = styled.img.attrs({
 export const ImageWrapper = styled.div`
   width: 100%;
   height: 100%;
-  margin-top: 4px;
+  margin-top: 8px;
 
+  & > * + * {
+    margin-top: 16px;
+  }
   @media ${MEDIA_QUERY.DESKTOP} {
     width: 550px;
     padding-right: 100px;

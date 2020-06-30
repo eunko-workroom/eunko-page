@@ -5,6 +5,13 @@
   src: url(./fonts/NotoSans-DemiLight.otf);
 }
 
+@font-face {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 300;
+  src: url(./fonts/NotoSans-Light.otf);
+}
+
 .wrapper {
   font-family: "Noto Sans", sans-serif;
   font-weight: 350;
