@@ -46,10 +46,14 @@ export const MenuItem = styled.span<{ selected?: boolean }>`
 export const Nav = styled.nav`
   flex: 1;
   display: flex;
-  margin-left: 16px;
+  align-items: center;
   font-size: 17px;
   line-height: 1.35;
   color: #c4c4c4;
+
+  @media ${MEDIA_QUERY.EXCEPT_DESKTOP} {
+    font-size: 13px;
+  }
 
   & > ${MenuItem} + ${MenuItem} {
     &::before {

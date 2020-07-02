@@ -32,18 +32,18 @@ export const Content = styled.div`
 
 export const LeftButtonWrapper = styled.div`
   position: absolute;
-  top: -10px;
+  top: -12px;
   right: 36px;
   font-size: 35px;
   cursor: pointer;
-  font-weight: 300;
+  font-weight: 100;
 `;
 export const RightButtonWrapper = styled.div`
   position: absolute;
-  top: -10px;
+  top: -12px;
   right: 0;
   font-size: 35px;
-  font-weight: 300;
+  font-weight: 100;
   cursor: pointer;
 `;
 

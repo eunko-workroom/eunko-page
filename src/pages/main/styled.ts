@@ -23,7 +23,7 @@ export const Wrapper = styled.div`
   position: relative;
 
   @media ${MEDIA_QUERY.EXCEPT_DESKTOP} {
-    padding: 0 16px;
+    padding-right: 16px;
   }
 `;
 

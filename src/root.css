@@ -12,6 +12,20 @@
   src: url(./fonts/NotoSans-Light.otf);
 }
 
+@font-face {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 200;
+  src: url(./fonts/NotoSans-Regular.otf);
+}
+
+@font-face {
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 100;
+  src: url(./fonts/NotoSans-Thin.otf);
+}
+
 .wrapper {
   font-family: "Noto Sans", sans-serif;
   font-weight: 350;
