@@ -5,7 +5,7 @@ import {
   Category,
   SubMenuItem,
 } from "../../common/components/subMenu";
-import { useSelectedMenuState } from "../../common/hooks/usePageState";
+import SelectedMenuContext from "../../common/context/selectedMenuContext";
 
 export default function Photography({ menu }: { menu: Common.ISubMenu[] }) {
   const {
@@ -13,18 +13,22 @@ export default function Photography({ menu }: { menu: Common.ISubMenu[] }) {
     selectedMenu,
     selectedMenuId,
     setSelectedMenuId,
-    handleBackButtonClick,
     selectNextMenu,
     selectPrevMenu,
     startLastIndex,
-  } = useSelectedMenuState(menu);
+    setMenu,
+  } = React.useContext(SelectedMenuContext);
+
+  React.useEffect(() => {
+    setMenu(menu);
+  }, [menu, setMenu]);
+
   return (
     <PageTemplate
       menu={selectedMenu !== undefined ? [selectedMenu] : undefined}
       startLastIndex={startLastIndex}
       selectNextMenu={selectNextMenu}
       selectPrevMenu={selectPrevMenu}
-      handleBackButtonClick={handleBackButtonClick}
     >
       <SubMenu>
         {sortByCategory.map((category) => (

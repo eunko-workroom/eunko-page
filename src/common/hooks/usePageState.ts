@@ -1,6 +1,7 @@
 import React from "react";
 
-export function useSelectedMenuState(menu: Common.ISubMenu[]) {
+export function useSelectedMenuState() {
+  const [menu, setMenu] = React.useState<Common.ISubMenu[]>([]);
   const [selectedMenuId, setSelectedMenuId] = React.useState<string>("");
   const [startLastIndex, setStartLastIndex] = React.useState(false);
 
@@ -17,10 +18,6 @@ export function useSelectedMenuState(menu: Common.ISubMenu[]) {
 
     return result;
   }, [] as Common.ISortByCategory[]);
-
-  const handleBackButtonClick = React.useCallback(() => {
-    setSelectedMenuId("");
-  }, []);
 
   const selectedMenuIndex = React.useMemo(
     () => menu.findIndex((target) => target.id === selectedMenuId),
@@ -48,8 +45,8 @@ export function useSelectedMenuState(menu: Common.ISubMenu[]) {
     selectedMenuId,
     sortByCategory,
     selectedMenu,
+    setMenu,
     setSelectedMenuId,
-    handleBackButtonClick,
     selectNextMenu,
     selectPrevMenu,
     startLastIndex,

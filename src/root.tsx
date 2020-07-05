@@ -16,47 +16,52 @@ import UploadMainImage from "./pages/uploadMainImage";
 import { useGetAlbumsFromS3 } from "./common/hooks/useS3";
 
 import "./root.css";
+import SelectedMenuContext from "./common/context/selectedMenuContext";
+import { useSelectedMenuState } from "./common/hooks/usePageState";
 
 function RootComponent() {
   const contents = useGetAlbumsFromS3();
+  const props = useSelectedMenuState();
   return (
-    <HashRouter>
-      <div className="wrapper">
-        <Helmet title="Eunko" />
-        <GlobalStyle />
-        <GlobalAppBar>
-          <Switch>
-            <Route path="/photography">
-              <Photography menu={contents.Photography} />
-            </Route>
-            <Route path="/editorial">
-              <Editorial menu={contents.Editorial} />
-            </Route>
-            <Route path="/more">
-              <More menu={contents.More} />
-            </Route>
-            <Route path="/upload/file">
-              <UploadFile contents={contents} />
-            </Route>
-            <Route path="/upload/main">
-              <UploadMainImage contents={contents} />
-            </Route>
-            <Route path="/delete/file">
-              <DeleteFile contents={contents} />
-            </Route>
-            <Route path="/upload/submenu/image">
-              <UploadCategoryImage contents={contents} />
-            </Route>
-            <Route path="/delete/submenu/image">
-              <DeleteCategoryImage contents={contents} />
-            </Route>
-            <Route path="/">
-              <Main main={contents.Main} />
-            </Route>
-          </Switch>
-        </GlobalAppBar>
-      </div>
-    </HashRouter>
+    <SelectedMenuContext.Provider value={props}>
+      <HashRouter>
+        <div className="wrapper">
+          <Helmet title="Eunko" />
+          <GlobalStyle />
+          <GlobalAppBar>
+            <Switch>
+              <Route path="/photography">
+                <Photography menu={contents.Photography} />
+              </Route>
+              <Route path="/editorial">
+                <Editorial menu={contents.Editorial} />
+              </Route>
+              <Route path="/more">
+                <More menu={contents.More} />
+              </Route>
+              <Route path="/upload/file">
+                <UploadFile contents={contents} />
+              </Route>
+              <Route path="/upload/main">
+                <UploadMainImage contents={contents} />
+              </Route>
+              <Route path="/delete/file">
+                <DeleteFile contents={contents} />
+              </Route>
+              <Route path="/upload/submenu/image">
+                <UploadCategoryImage contents={contents} />
+              </Route>
+              <Route path="/delete/submenu/image">
+                <DeleteCategoryImage contents={contents} />
+              </Route>
+              <Route path="/">
+                <Main main={contents.Main} />
+              </Route>
+            </Switch>
+          </GlobalAppBar>
+        </div>
+      </HashRouter>
+    </SelectedMenuContext.Provider>
   );
 }
 

@@ -1,11 +1,12 @@
 import React from "react";
 import { Wrapper, Header, Main, Logo, Nav, MenuItem } from "./styled";
 import { Link, useLocation } from "react-router-dom";
+import SelectedMenuContext from "../../context/selectedMenuContext";
 
 const GlobalAppBar: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
   const { pathname } = useLocation();
   const menu = React.useMemo(() => pathname.replace("/", ""), [pathname]);
-
+  const { setSelectedMenuId } = React.useContext(SelectedMenuContext);
   const photographyRef = React.useRef<HTMLAnchorElement>(null);
   const editorialRef = React.useRef<HTMLAnchorElement>(null);
   const moreRef = React.useRef<HTMLAnchorElement>(null);
@@ -19,7 +20,17 @@ const GlobalAppBar: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
         return moreRef.current?.offsetLeft;
     }
   }, [menu]);
-  console.log(mainPosition || 16);
+
+  const handleClickPhotography = React.useCallback(() => {
+    if (menu === "photography") {
+      setSelectedMenuId("");
+    }
+  }, [menu, setSelectedMenuId]);
+  const handleClickEditorial = React.useCallback(() => {
+    if (menu === "editorial") {
+      setSelectedMenuId("");
+    }
+  }, [menu, setSelectedMenuId]);
 
   return (
     <Wrapper>
@@ -28,12 +39,18 @@ const GlobalAppBar: React.FC<React.PropsWithChildren<{}>> = ({ children }) => {
           <Link to="/">Eun Ko</Link>
         </Logo>
         <Nav>
-          <MenuItem selected={menu === "photography"}>
+          <MenuItem
+            selected={menu === "photography"}
+            onClick={handleClickPhotography}
+          >
             <Link ref={photographyRef} to="/photography">
               Photography
             </Link>
           </MenuItem>
-          <MenuItem selected={menu === "editorial"}>
+          <MenuItem
+            selected={menu === "editorial"}
+            onClick={handleClickEditorial}
+          >
             <Link ref={editorialRef} to="/editorial">
               Editorial Design
             </Link>
