@@ -18,7 +18,7 @@ export default function Editorial({ menu }: { menu: Common.ISubMenu[] }) {
     startLastIndex,
     setMenu,
   } = React.useContext(SelectedMenuContext);
-  console.log(selectedMenuId);
+
   React.useEffect(() => {
     setMenu(menu);
   }, [menu, setMenu]);
