@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export default createGlobalStyle`
   html {
     -webkit-overflow-scrolling: touch;
-    font-size: 10px;
+    font-size: 20px;
     box-sizing: border-box;
   }
 
