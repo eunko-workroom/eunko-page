@@ -15,7 +15,7 @@ export default createGlobalStyle`
     
     margin: 0;
     -webkit-overflow-scrolling: touch;
-    font-weight: 300;
+    font-weight: 350;
     letter-spacing: 0.2px;
     line-height: 1.35;
   }
@@ -28,7 +28,7 @@ export default createGlobalStyle`
   }
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    font-weight: 300;
+    font-weight: 350;
     line-height: 1.35; 
   }
   li {
