@@ -16,7 +16,7 @@ export default createGlobalStyle`
     margin: 0;
     -webkit-overflow-scrolling: touch;
     font-weight: 350;
-    letter-spacing: 0.1px;
+    letter-spacing: 0.2px;
     line-height: 1.35;
   }
   html,
