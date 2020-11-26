@@ -1,8 +1,8 @@
 @font-face {
-  font-family: "Noto Sans";
+  font-family: "NotoSansCJKkr";
   font-style: normal;
-  font-weight: 350;
-  src: url(./fonts/NotoSans-DemiLight.otf);
+  font-weight: 450;
+  src: url(./fonts/NotoSansCJKkr-DemiLight.otf);
 }
 
 @font-face {
